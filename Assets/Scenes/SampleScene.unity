@@ -3651,6 +3651,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207b7b2a1bc3b384f984ba8698a72a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skills:
+  - {fileID: -3270749691070897954, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -7637036698441226068, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: 4327745837452563964, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -3921087108199702177, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: 291482919000558167, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -6793822770884829338, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -8602575724214924652, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -8751764464060839332, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -2097593393608851709, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: 1258488386730693875, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: 3461533940048546005, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -8694888159958641445, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: -531533630160224027, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: 7714095684564675693, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: 4278595842457033981, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  - {fileID: 4093048160847888728, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}
+  pnSkill: {fileID: 301468307}
+  isRandom: 0
 --- !u!1001 &367215510
 PrefabInstance:
   m_ObjectHideFlags: 0
