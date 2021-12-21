@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<CharacterInfo>().health > 0){
         moveDir = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.A)){
             if (!IsCollide(Vector3.left))
@@ -29,9 +30,10 @@ public class PlayerMovement : MonoBehaviour
             if (!IsCollide(Vector3.back))
                 moveDir.z += -1; 
         }
-        GetComponent<Rigidbody>().velocity = moveDir * moveSpeed;        
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 25, transform.position.z - 9);
+        GetComponent<Rigidbody>().velocity = moveDir * moveSpeed;
         transform.rotation = Quaternion.LookRotation(new Vector3((Input.mousePosition.x - Screen.width / 2), 0, (Input.mousePosition.y - Screen.height / 2)));
+        }        
+        cam.transform.position = new Vector3(transform.position.x, transform.position.y + 25, transform.position.z - 9);
     }
 
     private bool IsCollide(Vector3 moveDir){

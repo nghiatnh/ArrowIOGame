@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        GameInformation.Instance.Reload();
         GenerateItem();
         GenerateEnemy();
     }
@@ -45,9 +45,15 @@ public class GameController : MonoBehaviour
     }
 
     public void GenerateEnemy(){
+        GameObject player = GameObject.Find("Player");
         while (GameInformation.Instance.EnemyCount < 15){
             Vector3 pos = GenerateAt(new int[4]{-300, 300, -300, 300}, 0.7f);
-            GameObject.Instantiate(Enemy, new Vector3(pos.x, 0.1f, pos.z), new Quaternion(0, 0, 0, 1), Enemies);
+            GameObject enemy = GameObject.Instantiate(Enemy, new Vector3(pos.x, 0.1f, pos.z), new Quaternion(0, 0, 0, 1), Enemies);
+            enemy.GetComponent<CharacterInfo>().level = player.GetComponent<CharacterInfo>().level;
+            for (int i = 1; i < enemy.GetComponent<CharacterInfo>().level; i++){
+                int skill = Random.Range(0, SkillController.Instance.LIST_SKILL.Length);
+                SkillController.ChooseSkill((SKILLS)SkillController.Instance.LIST_SKILL.GetValue(skill), enemy.transform);
+            }
             GameInformation.Instance.EnemyCount++;
         }
     }

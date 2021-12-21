@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (GetComponent<CharacterInfo>().health <= 0) Die();
     }
 
     void OnTriggerEnter(Collider collider){
@@ -35,17 +35,26 @@ public class PlayerController : MonoBehaviour
                 Destroy(obj);
                 break;
             case "Diamond":
-                info.EXP += obj.GetComponent<ItemInfo>().EXP;
-                if (info.EXP >= info.MAX_EXP){
-                    info.level++;
-                    info.EXP -= info.MAX_EXP;
-                    txtLevel.text = "LV " + info.level;
-                }
+                GainEXP(obj.GetComponent<ItemInfo>().EXP);
                 Destroy(obj);
                 GameInformation.Instance.ItemCount--;
                 RectTransform rect = experienceBar.Find("ProgressBar").GetComponent<RectTransform>();
                 rect.sizeDelta = new Vector2(experienceBar.Find("Background").GetComponent<RectTransform>().sizeDelta.x * info.EXP / info.MAX_EXP, rect.sizeDelta.y);
                 break;
         }
+    }
+
+    public void GainEXP(int EXP){
+        info.EXP += EXP;
+        if (info.EXP >= info.MAX_EXP){
+            info.level++;
+            info.EXP -= info.MAX_EXP;            
+            txtLevel.text = "LV " + info.level;
+            GameObject.Find("GameController").GetComponent<UIController>().AddQueueSkill();
+        }
+    }
+    public void Die(){
+        if (transform.eulerAngles.x > 270 || transform.eulerAngles.x == 0f)
+            transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x - 5, transform.eulerAngles.y, 0));
     }
 }

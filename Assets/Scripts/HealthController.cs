@@ -14,7 +14,7 @@ public class HealthController : MonoBehaviour
     {
         playerInfo = transform.parent.GetComponent<CharacterInfo>();
         healthSprite = transform.Find("health");
-        maxScale = transform.Find("background").transform.localScale.x;
+        updateHealth();
         if (cam == null){
             cam = GameObject.Find("Main Camera").transform;
         }
@@ -30,5 +30,10 @@ public class HealthController : MonoBehaviour
     void LateUpdate()
     {
         transform.LookAt(transform.position + cam.forward);
+    }
+
+    public void updateHealth(){
+        transform.localScale = new Vector3(0.0005f * playerInfo.maxHealth, transform.localScale.y, transform.localScale.z);
+        maxScale = transform.Find("background").transform.localScale.x;
     }
 }

@@ -44,6 +44,7 @@ public class EnemyController : MonoBehaviour
     void OnTriggerEnter(Collider collider){
         if (collider.transform.CompareTag("BulletPlayer")){
             GetComponent<CharacterInfo>().health -= collider.GetComponent<BulletController>().ATK * GameInformation.INIT_ATK / (GameInformation.INIT_ATK + GetComponent<CharacterInfo>().DEF);;
+            player.GetComponent<PlayerController>().GainEXP(10 + 5 * GetComponent<CharacterInfo>().level); 
             Destroy(collider.gameObject);
         }
         else if (collider.CompareTag("Heart"))
