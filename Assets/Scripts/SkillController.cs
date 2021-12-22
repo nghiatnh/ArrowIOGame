@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,55 +57,69 @@ public class SkillController
     }
 
     public static void ChooseSkill(SKILLS skill, Transform player){
+        CharacterInfo info = player.GetComponent<CharacterInfo>();
         switch (skill){
-            case SKILLS.ALL_STATUS_UP:
+            case SKILLS.ALL_STATUS_UP: //Done
+                info.DEF += 2;
+                info.ATK += 3;
+                info.speed += 1f;
+                if (player.gameObject.layer == 6)
+                    player.GetComponent<PlayerMovement>().UpdateSpeed();
                 break;
-            case SKILLS.HP_UP:
-                player.GetComponent<CharacterInfo>().maxHealth += 15;
+            case SKILLS.ATK_UP: //Done
+                info.ATK += 6;
+                break;
+            case SKILLS.ATK_UP_HP_DOWN: //Done
+                info.ATK += 4;
+                info.maxHealth -= 10;
+                info.health = Mathf.Min(info.health, info.maxHealth);
                 player.Find("Health").GetComponent<HealthController>().updateHealth();
+                break;
+            case SKILLS.BLOOD_SUCKING: //Done
+                info.status.Add(STATUS.BLOOD_SUCKING);
+                break;
+            case SKILLS.BULLET_THROUGH_WALL: //Done
+                info.status.Add(STATUS.BULLET_THROUGH_WALL);
+                break;
+            case SKILLS.BULLET_UP:
+                info.status.Add(STATUS.BULLET_UP);
+                break;
+            case SKILLS.CRIT: //Done
+                info.status.Add(STATUS.CRIT);
+                break;
+            case SKILLS.DEF_UP: //Done
+                info.DEF += 4;
+                break;
+            case SKILLS.HP_UP: //Done
+                info.maxHealth += 20;
+                info.health += 20;
+                player.Find("Health").GetComponent<HealthController>().updateHealth();
+                break;
+            case SKILLS.KILL_HP_UP: //Done
+                info.status.Add(STATUS.KILL_HP_UP);
+                break;
+            case SKILLS.MAGNET: //Done
+                BoxCollider collider = player.GetComponent<BoxCollider>();
+                collider.size = new Vector3(collider.size.x * 2f, collider.size.y, collider.size.z * 2f);
+                break;
+            case SKILLS.MAKE_SPIKE:
+                info.status.Add(STATUS.MAKE_SPIKE);
+                break;
+            case SKILLS.MORE_EXP: //Done
+                info.status.Add(STATUS.MORE_EXP); 
+                break;
+            case SKILLS.RANGE_UP: //Done
+                info.range += 5f; 
+                break;
+            case SKILLS.SPEED_UP: //Done
+                info.speed += 3f;
+                if (player.gameObject.layer == 6)
+                    player.GetComponent<PlayerMovement>().UpdateSpeed();
+                break;
+            case SKILLS.THROUGH_WALL:
+                info.status.Add(STATUS.THROUGH_WALL);
                 break;
         }
     }
     #endregion
-
-    #region Constants
-    public readonly Array LIST_SKILL = Enum.GetValues(typeof(SKILLS));
-    public readonly Dictionary<SKILLS, string> SKILL_DESCRIPTIONS = new Dictionary<SKILLS, string>(){
-        {SKILLS.MAGNET, "You will get more diamond around you!"},
-        {SKILLS.RANGE_UP, "You will get more diamond around you!"},
-        {SKILLS.CRIT, "You will get more diamond around you!"},
-        {SKILLS.BLOOD_SUCKING, "You will get more diamond around you!"},
-        {SKILLS.ALL_STATUS_UP, "You will get more diamond around you!"},
-        {SKILLS.THROUGH_WALL, "You will get more diamond around you!"},
-        {SKILLS.MORE_EXP, "You will get more diamond around you!"},
-        {SKILLS.ATK_UP, "You will get more diamond around you!"},
-        {SKILLS.ATK_UP_HP_DOWN, "You will get more diamond around you!"},
-        {SKILLS.DEF_UP, ""},
-        {SKILLS.HP_UP, ""},
-        {SKILLS.SPEED_UP, ""},
-        {SKILLS.BULLET_UP, ""},
-        {SKILLS.KILL_HP_UP, ""},
-        {SKILLS.BULLET_THROUGH_WALL, ""},
-        {SKILLS.MAKE_SPIKE, ""},
-    };
-    #endregion
-}
-
-public enum SKILLS{
-    MAGNET,
-    RANGE_UP,
-    CRIT,
-    BLOOD_SUCKING,
-    ALL_STATUS_UP,
-    THROUGH_WALL,
-    MORE_EXP,
-    ATK_UP,
-    ATK_UP_HP_DOWN,
-    DEF_UP,
-    HP_UP,
-    SPEED_UP,
-    BULLET_UP,
-    KILL_HP_UP,
-    BULLET_THROUGH_WALL,
-    MAKE_SPIKE,
 }

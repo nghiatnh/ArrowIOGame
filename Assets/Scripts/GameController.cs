@@ -51,8 +51,8 @@ public class GameController : MonoBehaviour
             GameObject enemy = GameObject.Instantiate(Enemy, new Vector3(pos.x, 0.1f, pos.z), new Quaternion(0, 0, 0, 1), Enemies);
             enemy.GetComponent<CharacterInfo>().level = player.GetComponent<CharacterInfo>().level;
             for (int i = 1; i < enemy.GetComponent<CharacterInfo>().level; i++){
-                int skill = Random.Range(0, SkillController.Instance.LIST_SKILL.Length);
-                SkillController.ChooseSkill((SKILLS)SkillController.Instance.LIST_SKILL.GetValue(skill), enemy.transform);
+                int skill = Random.Range(0, GameConstant.LIST_SKILL.Length);
+                SkillController.ChooseSkill((SKILLS)GameConstant.LIST_SKILL.GetValue(skill), enemy.transform);
             }
             GameInformation.Instance.EnemyCount++;
         }

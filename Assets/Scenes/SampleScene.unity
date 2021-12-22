@@ -12622,6 +12622,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1111393962517891486, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
+      propertyPath: status.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5187012011128537194, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
       propertyPath: info
       value: 

@@ -39,4 +39,8 @@ public class PlayerMovement : MonoBehaviour
     private bool IsCollide(Vector3 moveDir){
         return Physics.Raycast(gameObject.transform.position, moveDir, 0.55f, Wall);
     }
+
+    public void UpdateSpeed(){
+        moveSpeed = GetComponent<CharacterInfo>().speed;
+    }
 }

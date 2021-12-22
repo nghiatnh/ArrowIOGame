@@ -57,10 +57,10 @@ public class UIController : MonoBehaviour
         if (SkillController.Instance.isRandom) return;
         isShowSkill = false;
         pnSkill.gameObject.active = false;
-        SKILLS selected = (SKILLS)SkillController.Instance.LIST_SKILL.GetValue(SkillController.Instance.currentSkills[index]);
+        SKILLS selected = (SKILLS)GameConstant.LIST_SKILL.GetValue(SkillController.Instance.currentSkills[index]);
         SkillController.ChooseSkill(selected, player);
         txtDescription.gameObject.active = true;
-        txtDescription.GetComponent<Text>().text = SkillController.Instance.SKILL_DESCRIPTIONS[selected];
+        txtDescription.GetComponent<Text>().text = GameConstant.SKILL_DESCRIPTIONS[selected];
         SkillController.Instance.StartDescribe();
     }
 

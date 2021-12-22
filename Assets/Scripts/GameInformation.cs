@@ -16,8 +16,6 @@ public class GameInformation
     public int ItemCount = 0;
     public int EnemyCount = 0;
 
-    public const float INIT_ATK = 5;
-
     public void Reload(){
         instance = new GameInformation();
     }

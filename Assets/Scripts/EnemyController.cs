@@ -6,12 +6,14 @@ public class EnemyController : MonoBehaviour
 {
     public GameObject player;
     public GameObject bullet;
+    public GameObject crit;
     public LayerMask playerLayerMask;
 
     private float lastTimeAttack = 0f;
     private float lastTimeMove = 0f;
     private float moveSpeed = 10f;
     private Vector3 moveDir;
+    private float lastTimeCrit = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class EnemyController : MonoBehaviour
                 GameObject obj = Instantiate(bullet, transform.position - new Vector3(0,-0.5f,0), transform.rotation);
                 obj.GetComponent<BulletController>().initSpeed = GetComponent<CharacterInfo>().range;
                 obj.GetComponent<BulletController>().ATK = GetComponent<CharacterInfo>().ATK;
+                obj.GetComponent<BulletController>().parent = gameObject;
                 obj.tag = "BulletEnemy";
             }
             lastTimeAttack = Time.realtimeSinceStartup;
@@ -38,16 +41,34 @@ public class EnemyController : MonoBehaviour
             lastTimeMove = Time.realtimeSinceStartup;
         }
         GetComponent<Rigidbody>().velocity = moveDir * moveSpeed;
-        OnDie();
+
+        if (crit.active == true && Time.realtimeSinceStartup - lastTimeCrit >= 0.5f) crit.SetActive(false);
+        crit.transform.LookAt(crit.transform.position + GameObject.Find("Main Camera").transform.forward);
     }
 
     void OnTriggerEnter(Collider collider){
         if (collider.transform.CompareTag("BulletPlayer")){
-            GetComponent<CharacterInfo>().health -= collider.GetComponent<BulletController>().ATK * GameInformation.INIT_ATK / (GameInformation.INIT_ATK + GetComponent<CharacterInfo>().DEF);;
-            player.GetComponent<PlayerController>().GainEXP(10 + 5 * GetComponent<CharacterInfo>().level); 
+            GameObject attacker = collider.GetComponent<BulletController>().parent;
+            float ATK = collider.GetComponent<BulletController>().ATK;
+            if (attacker.GetComponent<CharacterInfo>().status.Contains(STATUS.CRIT)){
+                int r = Random.Range(0, 100);
+                if (r < 25) {
+                    ATK *= 2;
+                    crit.SetActive(true);
+                    lastTimeCrit = Time.realtimeSinceStartup;
+                }
+            }
+            GetComponent<CharacterInfo>().health -=  ATK * GameConstant.INIT_ATK / (GameConstant.INIT_ATK + GetComponent<CharacterInfo>().DEF);;
+            if (attacker.GetComponent<CharacterInfo>().status.Contains(STATUS.BLOOD_SUCKING))
+                attacker.GetComponent<CharacterInfo>().GainHealth(4);
+            if (GetComponent<CharacterInfo>().health <= 0){
+                if (attacker.GetComponent<CharacterInfo>().status.Contains(STATUS.KILL_HP_UP))
+                    attacker.GetComponent<CharacterInfo>().GainHealth(20);
+                OnDie();
+            }
             Destroy(collider.gameObject);
         }
-        else if (collider.CompareTag("Heart"))
+        if (collider.CompareTag("Heart"))
             CollectItem(collider.tag, collider.gameObject);
     }
 
@@ -73,7 +94,10 @@ public class EnemyController : MonoBehaviour
     }
 
     void OnDie(){
-        if (GetComponent<CharacterInfo>().health <= 0)
-            Destroy(gameObject); 
+        if (GetComponent<CharacterInfo>().health <= 0){
+            player.GetComponent<PlayerController>().GainEXP(10 + (int)(5 * GetComponent<CharacterInfo>().level * Mathf.Pow(1.5f, player.GetComponent<CharacterInfo>().status.FindAll(x => x == STATUS.MORE_EXP).Count + 1))); 
+            Destroy(gameObject);
+            GameInformation.Instance.EnemyCount--;
+        }
     }
 }

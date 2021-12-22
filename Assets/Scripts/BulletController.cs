@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
+    public GameObject parent;
     public float initSpeed = 10f;
     public float ATK = 0f;
     private float stayTime = 0f;
@@ -22,7 +23,7 @@ public class BulletController : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider){
-        if (collider.CompareTag("Wall") || collider.CompareTag("Ground")){
+        if ((collider.CompareTag("Wall") && !parent.GetComponent<CharacterInfo>().status.Contains(STATUS.BULLET_THROUGH_WALL)) || collider.CompareTag("Ground")){
             Destroy(gameObject);
         }
     }

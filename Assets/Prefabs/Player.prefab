@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 5187012011128537194}
   - component: {fileID: 6598671642880920446}
   - component: {fileID: 1111393962517891486}
+  - component: {fileID: 5916057641993188342}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -348,9 +349,22 @@ MonoBehaviour:
   MAX_EXP: 100
   speed: 5
   range: 15
-  isCrit: 0
+  status: 
   pets: []
   weapon: {fileID: 0}
+--- !u!65 &5916057641993188342
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8654892915708967553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.2, z: 1}
+  m_Center: {x: 0, y: -0.4, z: 0}
 --- !u!1001 &6944415034612021174
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         info = GetComponent<CharacterInfo>();
-        info.speed = GetComponent<PlayerMovement>().moveSpeed;
+        GetComponent<PlayerMovement>().UpdateSpeed();
         txtLevel.text = "LV " + info.level;
+        info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level];
     }
 
     // Update is called once per frame
@@ -31,26 +32,29 @@ public class PlayerController : MonoBehaviour
         switch(itemName){
             case "Heart":
                 GameInformation.Instance.ItemCount--;
-                info.health = Mathf.Min(info.maxHealth, info.health + obj.GetComponent<ItemInfo>().Health);
+                info.GainHealth(obj.GetComponent<ItemInfo>().Health);
                 Destroy(obj);
                 break;
             case "Diamond":
                 GainEXP(obj.GetComponent<ItemInfo>().EXP);
                 Destroy(obj);
                 GameInformation.Instance.ItemCount--;
-                RectTransform rect = experienceBar.Find("ProgressBar").GetComponent<RectTransform>();
-                rect.sizeDelta = new Vector2(experienceBar.Find("Background").GetComponent<RectTransform>().sizeDelta.x * info.EXP / info.MAX_EXP, rect.sizeDelta.y);
                 break;
         }
     }
 
     public void GainEXP(int EXP){
         info.EXP += EXP;
+        RectTransform rect = experienceBar.Find("ProgressBar").GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(experienceBar.Find("Background").GetComponent<RectTransform>().sizeDelta.x * info.EXP / info.MAX_EXP, rect.sizeDelta.y);
         if (info.EXP >= info.MAX_EXP){
             info.level++;
-            info.EXP -= info.MAX_EXP;            
             txtLevel.text = "LV " + info.level;
             GameObject.Find("GameController").GetComponent<UIController>().AddQueueSkill();
+            info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level]; 
+            int exp = info.EXP;
+            info.EXP = 0;      
+            GainEXP(exp - GameConstant.MAX_EXP_LEVEL[info.level - 1]);     
         }
     }
     public void Die(){
