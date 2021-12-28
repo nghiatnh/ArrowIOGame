@@ -63,8 +63,6 @@ public class SkillController
                 info.DEF += 2;
                 info.ATK += 3;
                 info.speed += 1f;
-                if (player.gameObject.layer == 6)
-                    player.GetComponent<PlayerMovement>().UpdateSpeed();
                 break;
             case SKILLS.ATK_UP: //Done
                 info.ATK += 6;
@@ -81,7 +79,7 @@ public class SkillController
             case SKILLS.BULLET_THROUGH_WALL: //Done
                 info.status.Add(STATUS.BULLET_THROUGH_WALL);
                 break;
-            case SKILLS.BULLET_UP:
+            case SKILLS.BULLET_UP: //Done
                 info.status.Add(STATUS.BULLET_UP);
                 break;
             case SKILLS.CRIT: //Done
@@ -99,10 +97,10 @@ public class SkillController
                 info.status.Add(STATUS.KILL_HP_UP);
                 break;
             case SKILLS.MAGNET: //Done
-                BoxCollider collider = player.GetComponent<BoxCollider>();
+                BoxCollider collider = player.GetComponent<CharacterController>().getItemCollider;
                 collider.size = new Vector3(collider.size.x * 2f, collider.size.y, collider.size.z * 2f);
                 break;
-            case SKILLS.MAKE_SPIKE:
+            case SKILLS.MAKE_SPIKE: //Done
                 info.status.Add(STATUS.MAKE_SPIKE);
                 break;
             case SKILLS.MORE_EXP: //Done
@@ -113,11 +111,12 @@ public class SkillController
                 break;
             case SKILLS.SPEED_UP: //Done
                 info.speed += 3f;
-                if (player.gameObject.layer == 6)
-                    player.GetComponent<PlayerMovement>().UpdateSpeed();
                 break;
-            case SKILLS.THROUGH_WALL:
+            case SKILLS.THROUGH_WALL: //Done
                 info.status.Add(STATUS.THROUGH_WALL);
+                break;
+            case SKILLS.PET_NINJA: 
+                player.GetComponent<CharacterController>().CreatePet();
                 break;
         }
     }

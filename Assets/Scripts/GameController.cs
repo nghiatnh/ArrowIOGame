@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     }
 
     public void GenerateItem(){
+        GameInformation.Instance.ItemCount = Items.childCount;
         while (GameInformation.Instance.ItemCount < 300){
             int itemType = Random.Range(0,101);
             float angle = Random.Range(0, 10) * 36f;
@@ -46,10 +47,20 @@ public class GameController : MonoBehaviour
 
     public void GenerateEnemy(){
         GameObject player = GameObject.Find("Player");
+        GameInformation.Instance.EnemyCount = Enemies.childCount;
+        List<string> names = new List<string>();
+        for (int i = 0; i < GameConstant.ENEMY_NAME.Length; i++)
+            names.Add(GameConstant.ENEMY_NAME[i]);
         while (GameInformation.Instance.EnemyCount < 15){
             Vector3 pos = GenerateAt(new int[4]{-300, 300, -300, 300}, 0.7f);
             GameObject enemy = GameObject.Instantiate(Enemy, new Vector3(pos.x, 0.1f, pos.z), new Quaternion(0, 0, 0, 1), Enemies);
             enemy.GetComponent<CharacterInfo>().level = player.GetComponent<CharacterInfo>().level;
+            int indexName = Random.Range(0, names.Count);
+            string name = names[indexName];
+            names.RemoveAt(indexName);
+            enemy.GetComponent<CharacterInfo>().characterName = name;
+            enemy.GetComponent<CharacterInfo>().powerPoint = player.GetComponent<CharacterInfo>().powerPoint + Random.Range(10, 20) * enemy.GetComponent<CharacterInfo>().level;
+            enemy.transform.Find("Health").Find("Name").GetComponent<TextMesh>().text = name;
             for (int i = 1; i < enemy.GetComponent<CharacterInfo>().level; i++){
                 int skill = Random.Range(0, GameConstant.LIST_SKILL.Length);
                 SkillController.ChooseSkill((SKILLS)GameConstant.LIST_SKILL.GetValue(skill), enemy.transform);

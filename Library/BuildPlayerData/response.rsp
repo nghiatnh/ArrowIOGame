@@ -1,5 +1,6 @@
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\Assembly-CSharp.dll"
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\Unity.2D.Tilemap.Extras.dll"
+-a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\Unity.Postprocessing.Runtime.dll"
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\UnityEngine.TestRunner.dll"
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\Unity.Timeline.dll"
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\Unity.TextMeshPro.dll"

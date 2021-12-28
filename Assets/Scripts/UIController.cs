@@ -8,12 +8,15 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {
     public Sprite[] Skills;
+    public Transform pnTop;
+    public GameObject txtPlayerTop;
     public Transform pnSkill;
     public Transform player;
     public Transform txtDescription;
     public GameObject pnRestart;
     private int queueSkillCount = 0;
     private bool isShowSkill = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +31,7 @@ public class UIController : MonoBehaviour
             queueSkillCount--;
             isShowSkill = true;
             SkillController.Instance.StartRandom();
-            pnSkill.gameObject.active = true;
+            pnSkill.gameObject.SetActive(true);
         }
         if (SkillController.Instance.isRandom)
         {    
@@ -41,12 +44,10 @@ public class UIController : MonoBehaviour
         if (SkillController.Instance.isDescribe){
             SkillController.Instance.DescribeSkill();
         }
-        else{
-            txtDescription.gameObject.active = false;
+        else {
+            txtDescription.gameObject.SetActive(false);
         }
-
-        if (player.eulerAngles.x == 270)
-            pnRestart.active = true;
+        UpdateTop();
     }
 
     public void AddQueueSkill(){
@@ -56,16 +57,34 @@ public class UIController : MonoBehaviour
     public void ChooseSkill(int index){
         if (SkillController.Instance.isRandom) return;
         isShowSkill = false;
-        pnSkill.gameObject.active = false;
+        pnSkill.gameObject.SetActive(false);
         SKILLS selected = (SKILLS)GameConstant.LIST_SKILL.GetValue(SkillController.Instance.currentSkills[index]);
         SkillController.ChooseSkill(selected, player);
-        txtDescription.gameObject.active = true;
+        txtDescription.gameObject.SetActive(true);
         txtDescription.GetComponent<Text>().text = GameConstant.SKILL_DESCRIPTIONS[selected];
         SkillController.Instance.StartDescribe();
     }
 
     public void Restart(){
-        pnRestart.active = false;
+        pnRestart.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameInformation.Instance.Reload();
+    }
+
+    public void UpdateTop(){
+        GameInformation.Instance.characters.Sort(GameConstant.CompareCharacterPower);
+        Debug.Log(GameInformation.Instance.characters.Count);
+        try{
+            for (int i = 0; i < pnTop.childCount; i++){
+                pnTop.GetChild(i).GetComponent<Text>().text = "#" + (i+1).ToString() + " " + GameInformation.Instance.characters[i].characterName + "(" + GameInformation.Instance.characters[i].powerPoint.ToString() +")";
+                if (GameInformation.Instance.characters[i].gameObject == player.gameObject)
+                    pnTop.GetChild(i).GetComponent<Text>().color = Color.blue;
+                else
+                    pnTop.GetChild(i).GetComponent<Text>().color = Color.black;
+            }
+            int playerIndex = GameInformation.Instance.characters.IndexOf(player.GetComponent<CharacterInfo>());
+            txtPlayerTop.GetComponent<Text>().text = "#" + (playerIndex+1).ToString() + " " + player.GetComponent<CharacterInfo>().characterName + "(" + player.GetComponent<CharacterInfo>().powerPoint.ToString() + ")";
+        }
+        catch {}
     }
 }

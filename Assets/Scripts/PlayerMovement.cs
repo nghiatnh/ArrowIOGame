@@ -4,43 +4,39 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 3f;
     private Vector3 moveDir;
     public LayerMask Wall;
+    public LayerMask Outer;
     public GameObject cam;
+    public FixedJoystick rotateJoystick;
+    public FixedJoystick moveJoystick;
 
     // Update is called once per frame
     void Update()
     {
+        float moveSpeed = GetComponent<CharacterInfo>().speed;
         if (GetComponent<CharacterInfo>().health > 0){
-        moveDir = new Vector3(0, 0, 0);
-        if (Input.GetKey(KeyCode.A)){
-            if (!IsCollide(Vector3.left))
-                moveDir.x += -1;
-        }
-        if (Input.GetKey(KeyCode.D)){
-            if (!IsCollide(Vector3.right))
-                moveDir.x += 1; 
-        }
-        if (Input.GetKey(KeyCode.W)){
-            if (!IsCollide(Vector3.forward))
-                moveDir.z += 1; 
-        }
-        if (Input.GetKey(KeyCode.S)){
-            if (!IsCollide(Vector3.back))
-                moveDir.z += -1; 
-        }
-        GetComponent<Rigidbody>().velocity = moveDir * moveSpeed;
-        transform.rotation = Quaternion.LookRotation(new Vector3((Input.mousePosition.x - Screen.width / 2), 0, (Input.mousePosition.y - Screen.height / 2)));
+            moveDir = new Vector3(0, GetComponent<Rigidbody>().velocity.y / moveSpeed, 0);
+            if (!IsCollide(new Vector3(moveJoystick.Direction.x, 0, moveJoystick.Direction.y)))
+                moveDir += new Vector3(moveJoystick.Direction.x, 0, moveJoystick.Direction.y);
+            else if (GetComponent<CharacterInfo>().status.Contains(STATUS.THROUGH_WALL))
+                ThroughWall(new Vector3(moveJoystick.Direction.x, 0, moveJoystick.Direction.y));
+            GetComponent<Rigidbody>().velocity = moveDir * moveSpeed;
+            if (rotateJoystick.Direction.x != 0 || rotateJoystick.Direction.y != 0) 
+                transform.rotation = Quaternion.LookRotation(new Vector3(rotateJoystick.Direction.x, 0, rotateJoystick.Direction.y));
         }        
+        if ((moveDir.x != 0 || moveDir.z != 0) && GetComponent<CharacterInfo>().status.Contains(STATUS.MAKE_SPIKE)){
+            GetComponent<CharacterController>().CreateSpike();
+        }
         cam.transform.position = new Vector3(transform.position.x, transform.position.y + 25, transform.position.z - 9);
     }
 
     private bool IsCollide(Vector3 moveDir){
-        return Physics.Raycast(gameObject.transform.position, moveDir, 0.55f, Wall);
+        return Physics.Raycast(gameObject.transform.position, moveDir, 0.55f, Wall) || Physics.Raycast(gameObject.transform.position, moveDir, 0.55f, Outer);
     }
 
-    public void UpdateSpeed(){
-        moveSpeed = GetComponent<CharacterInfo>().speed;
+    private void ThroughWall(Vector3 moveDir){
+        if (!Physics.Raycast(transform.position + moveDir * 2f, moveDir, 1f, Wall) && !Physics.Raycast(transform.position, moveDir, 0.55f, Outer))
+            transform.position += moveDir * 2f;
     }
 }

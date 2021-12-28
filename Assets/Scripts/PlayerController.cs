@@ -5,22 +5,25 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioSource collectItemSource;
+    public AudioSource levelUpSource;
     public CharacterInfo info;
     public Transform experienceBar;
     public Text txtLevel;
+    public GameObject levelUp;
     // Start is called before the first frame update
     void Start()
     {
         info = GetComponent<CharacterInfo>();
-        GetComponent<PlayerMovement>().UpdateSpeed();
         txtLevel.text = "LV " + info.level;
         info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level];
+        info.characterName = GameInformation.Instance.PlayerName;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<CharacterInfo>().health <= 0) Die();
+        
     }
 
     void OnTriggerEnter(Collider collider){
@@ -31,11 +34,13 @@ public class PlayerController : MonoBehaviour
     void CollectItem(string itemName, GameObject obj){
         switch(itemName){
             case "Heart":
+                collectItemSource.Play();
                 GameInformation.Instance.ItemCount--;
                 info.GainHealth(obj.GetComponent<ItemInfo>().Health);
                 Destroy(obj);
                 break;
             case "Diamond":
+                collectItemSource.Play();
                 GainEXP(obj.GetComponent<ItemInfo>().EXP);
                 Destroy(obj);
                 GameInformation.Instance.ItemCount--;
@@ -53,12 +58,10 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("GameController").GetComponent<UIController>().AddQueueSkill();
             info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level]; 
             int exp = info.EXP;
-            info.EXP = 0;      
+            info.EXP = 0;
+            levelUp.GetComponent<Animator>().SetTrigger("LevelUp");
+            levelUpSource.Play();
             GainEXP(exp - GameConstant.MAX_EXP_LEVEL[info.level - 1]);     
         }
-    }
-    public void Die(){
-        if (transform.eulerAngles.x > 270 || transform.eulerAngles.x == 0f)
-            transform.rotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x - 5, transform.eulerAngles.y, 0));
     }
 }
