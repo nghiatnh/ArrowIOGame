@@ -312,7 +312,7 @@ MonoBehaviour:
   level: 1
   health: 0
   maxHealth: 1000
-  ATK: 5
+  ATK: 3
   DEF: 0
   EXP: 0
   MAX_EXP: 0
