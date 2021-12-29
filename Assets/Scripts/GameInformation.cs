@@ -16,9 +16,10 @@ public class GameInformation
     public int ItemCount = 0;
     public int EnemyCount = 0;
     public string PlayerName = "character";
+    public GameObject PlayerSkin;
     public List<CharacterInfo> characters = new List<CharacterInfo>();
 
     public void Reload(){
-        instance = new GameInformation() {PlayerName = instance.PlayerName};
+        instance = new GameInformation() {PlayerName = instance.PlayerName, PlayerSkin = instance.PlayerSkin};
     }
 }

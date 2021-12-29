@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\Scripts\SkillController.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\SkinController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\UnityProjects\2020.3.19f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -625,6 +626,9 @@
     <Reference Include="Unity.2D.Tilemap.Editor">
         <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+        <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -643,6 +647,9 @@
     <Reference Include="Unity.2D.Sprite.Editor">
         <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+        <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
@@ -657,12 +664,6 @@
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
         <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-        <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-        <HintPath>C:\Users\nghia\ArrowIOGame\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

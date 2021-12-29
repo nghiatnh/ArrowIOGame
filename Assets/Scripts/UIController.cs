@@ -73,7 +73,6 @@ public class UIController : MonoBehaviour
 
     public void UpdateTop(){
         GameInformation.Instance.characters.Sort(GameConstant.CompareCharacterPower);
-        Debug.Log(GameInformation.Instance.characters.Count);
         try{
             for (int i = 0; i < pnTop.childCount; i++){
                 pnTop.GetChild(i).GetComponent<Text>().text = "#" + (i+1).ToString() + " " + GameInformation.Instance.characters[i].characterName + "(" + GameInformation.Instance.characters[i].powerPoint.ToString() +")";

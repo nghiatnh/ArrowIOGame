@@ -14,6 +14,7 @@ ScriptsOnlyBuild:
     - PlayerAttack
     - PlayerController
     - PlayerMovement
+    - SkinController
     - SpikeController
     - UIController
     Unity.2D.Tilemap.Editor.dll:
@@ -59,10 +60,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -234,6 +233,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
@@ -268,6 +269,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3778}
     - Class: 114
       Script: {instanceID: 4748}
+    - Class: 114
+      Script: {instanceID: 28784}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -581,7 +584,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 6e9e036eb5eb2e032ba67ce2cd9e9da2
+      Hash: 5f8d5979a72661152961a2faa798b836
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -963,6 +966,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyController
+  - hash:
+      serializedVersion: 2
+      Hash: 3a3bf61409d908d8cb59f307db47b732
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SkinController
   platform: 13
   scenePathNames:
   - Assets/Scenes/StartScene.unity

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Transform experienceBar;
     public Text txtLevel;
     public GameObject levelUp;
+    public Transform Skin;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +19,9 @@ public class PlayerController : MonoBehaviour
         txtLevel.text = "LV " + info.level;
         info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level];
         info.characterName = GameInformation.Instance.PlayerName;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Skin == null)
+            Skin = transform.Find("Skin");
+        ChangeSkin();
     }
 
     void OnTriggerEnter(Collider collider){
@@ -63,5 +61,11 @@ public class PlayerController : MonoBehaviour
             levelUpSource.Play();
             GainEXP(exp - GameConstant.MAX_EXP_LEVEL[info.level - 1]);     
         }
+    }
+
+    public void ChangeSkin(){
+        Destroy(Skin.GetChild(0).gameObject);
+        GameObject skin = Instantiate(GameInformation.Instance.PlayerSkin, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), Skin);
+        skin.transform.localPosition = new Vector3(0, 0, 0);
     }
 }

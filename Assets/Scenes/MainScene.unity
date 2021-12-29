@@ -1444,6 +1444,11 @@ PrefabInstance:
       objectReference: {fileID: 2069463796}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
+--- !u!1 &40556992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4183228544296666173, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
+  m_PrefabInstance: {fileID: 40556991}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &43759172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48559,6 +48564,10 @@ PrefabInstance:
       propertyPath: Enemies
       value: 
       objectReference: {fileID: 1842922364}
+    - target: {fileID: 6679048592211583384, guid: f3f7f58325e675a4da62d19eb65f26e6, type: 3}
+      propertyPath: PlayerSkin
+      value: 
+      objectReference: {fileID: 40556992}
     - target: {fileID: 6679048592211583385, guid: f3f7f58325e675a4da62d19eb65f26e6, type: 3}
       propertyPath: m_RootOrder
       value: 1
