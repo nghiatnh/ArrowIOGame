@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     {
         if (GetComponent<CharacterInfo>().health <= 0) return;
         CollideTarget();
-        if (Time.realtimeSinceStartup - lastTimeAttack >= 0.75f){
+        if (Time.realtimeSinceStartup - lastTimeAttack >= 0.5f){
             if (target != null){
                 transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z));
                 GetComponent<CharacterController>().Attack(bullet, transform.position, transform.rotation);
@@ -81,12 +81,6 @@ public class EnemyController : MonoBehaviour
     void AfterDie(GameObject killer){
         if (killer.CompareTag("Player")){
             killer.GetComponent<PlayerController>().GainEXP((int)((5 + 10 * GetComponent<CharacterInfo>().level) * Mathf.Pow(1.5f, player.GetComponent<CharacterInfo>().status.FindAll(x => x == STATUS.MORE_EXP).Count + 1))); 
-            killer.GetComponent<CharacterInfo>().powerPoint = System.Math.Max(killer.GetComponent<CharacterInfo>().powerPoint, GetComponent<CharacterInfo>().powerPoint) + Random.Range(10, 20) * GetComponent<CharacterInfo>().level;
-        }
-        else if (killer.CompareTag("Pet") && killer.GetComponent<PetController>().parent.CompareTag("Player")){
-            killer = killer.GetComponent<PetController>().parent.gameObject;
-            killer.GetComponent<PlayerController>().GainEXP((int)((5 + 10 * GetComponent<CharacterInfo>().level) * Mathf.Pow(1.5f, player.GetComponent<CharacterInfo>().status.FindAll(x => x == STATUS.MORE_EXP).Count + 1))); 
-            killer.GetComponent<CharacterInfo>().powerPoint = System.Math.Max(killer.GetComponent<CharacterInfo>().powerPoint, GetComponent<CharacterInfo>().powerPoint) + Random.Range(10, 20) * GetComponent<CharacterInfo>().level;
         }
         Destroy(gameObject);
         GameInformation.Instance.EnemyCount--;

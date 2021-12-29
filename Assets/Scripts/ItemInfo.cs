@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class ItemInfo : MonoBehaviour
 {
-    public int Health = 20;
+    public int Health = 15;
     public int EXP = 2;
 }

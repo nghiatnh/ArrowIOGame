@@ -108,21 +108,26 @@ public class CharacterController : MonoBehaviour
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<CapsuleCollider>().isTrigger = true;
             transform.Find("Health").gameObject.SetActive(false);
+            if (attacker.CompareTag("Pet")) {attacker = attacker.GetComponent<PetController>().parent.gameObject;}
+            // Attacker gain power
+            attacker.GetComponent<CharacterInfo>().powerPoint = System.Math.Max(attacker.GetComponent<CharacterInfo>().powerPoint, GetComponent<CharacterInfo>().powerPoint) + Random.Range(10, 20) * GetComponent<CharacterInfo>().level;
             // If kill gain health
             if (attacker.GetComponent<CharacterInfo>().status.Contains(STATUS.KILL_HP_UP))
-                attacker.GetComponent<CharacterInfo>().GainHealth(20);
+                attacker.GetComponent<CharacterInfo>().GainHealth(20 * attacker.GetComponent<CharacterInfo>().status.FindAll(x => x == STATUS.KILL_HP_UP).Count);
+            
             killer = attacker;
             startDeadTime = Time.realtimeSinceStartup;
         }
 
         // Blood Sucking
         if (attacker.GetComponent<CharacterInfo>().status.Contains(STATUS.BLOOD_SUCKING))
-            attacker.GetComponent<CharacterInfo>().GainHealth(4);
+            attacker.GetComponent<CharacterInfo>().GainHealth((ATK / 5) * attacker.GetComponent<CharacterInfo>().status.FindAll(x => x == STATUS.BLOOD_SUCKING).Count);
     }
 
     public void CreatePet(){
         GameObject obj = Instantiate(pet, transform.position - new Vector3(-1, 0, 0), transform.rotation);
         obj.GetComponent<PetController>().parent = transform;
+        obj.GetComponent<CharacterInfo>().ATK = GetComponent<CharacterInfo>().ATK / 6;
     }
 
     public void OnGate(){

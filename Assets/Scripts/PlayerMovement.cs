@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
             else if (GetComponent<CharacterInfo>().status.Contains(STATUS.THROUGH_WALL))
                 ThroughWall(new Vector3(moveJoystick.Direction.x, 0, moveJoystick.Direction.y));
             GetComponent<Rigidbody>().velocity = moveDir * moveSpeed;
-            if (rotateJoystick.Direction.x != 0 || rotateJoystick.Direction.y != 0) 
+            if (Mathf.Abs(rotateJoystick.Direction.x) >= 0.5f || Mathf.Abs(rotateJoystick.Direction.y) >= 0.5f) 
                 transform.rotation = Quaternion.LookRotation(new Vector3(rotateJoystick.Direction.x, 0, rotateJoystick.Direction.y));
         }        
         if ((moveDir.x != 0 || moveDir.z != 0) && GetComponent<CharacterInfo>().status.Contains(STATUS.MAKE_SPIKE)){

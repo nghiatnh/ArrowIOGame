@@ -35,4 +35,8 @@ public class AnimationController : MonoBehaviour
     public void UpdateText(InputField text){
         text.text = GameInformation.Instance.PlayerName;
     }
+
+    public void ShowInventory(Transform pnInventory){
+        pnInventory.GetComponent<Animator>().SetBool("IsShow", !pnInventory.GetComponent<Animator>().GetBool("IsShow"));
+    }
 }

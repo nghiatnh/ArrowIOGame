@@ -40,6 +40,7 @@
      <Compile Include="Assets\Scripts\Joysticks\Base\Joystick.cs" />
      <Compile Include="Assets\Scripts\Joysticks\Joysticks\FixedJoystick.cs" />
      <Compile Include="Assets\Scripts\Joysticks\Joysticks\VariableJoystick.cs" />
+     <Compile Include="Assets\Scripts\SkinController.cs" />
      <Compile Include="Assets\Scripts\ItemInfo.cs" />
      <Compile Include="Assets\Scripts\UIController.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
@@ -58,7 +59,7 @@
      <Compile Include="Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\Scripts\SkillController.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\SkinController.cs" />
+     <Compile Include="Assets\Scripts\InventoryController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\UnityProjects\2020.3.19f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -18,6 +18,7 @@ public class GameInformation
     public string PlayerName = "character";
     public GameObject PlayerSkin;
     public List<CharacterInfo> characters = new List<CharacterInfo>();
+    public List<int> Skills = new List<int>();
 
     public void Reload(){
         instance = new GameInformation() {PlayerName = instance.PlayerName, PlayerSkin = instance.PlayerSkin};

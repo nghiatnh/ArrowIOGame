@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    public Transform Inventory;
     public Sprite[] Skills;
     public Transform pnTop;
     public GameObject txtPlayerTop;
@@ -16,6 +17,7 @@ public class UIController : MonoBehaviour
     public GameObject pnRestart;
     private int queueSkillCount = 0;
     private bool isShowSkill = false;
+    private float lastUpdateTop = 0f;
     
     // Start is called before the first frame update
     void Start()
@@ -47,7 +49,10 @@ public class UIController : MonoBehaviour
         else {
             txtDescription.gameObject.SetActive(false);
         }
-        UpdateTop();
+        if (Time.realtimeSinceStartup - lastUpdateTop >= 1f){
+            UpdateTop();
+            lastUpdateTop = Time.realtimeSinceStartup;
+        }
     }
 
     public void AddQueueSkill(){
@@ -63,6 +68,8 @@ public class UIController : MonoBehaviour
         txtDescription.gameObject.SetActive(true);
         txtDescription.GetComponent<Text>().text = GameConstant.SKILL_DESCRIPTIONS[selected];
         SkillController.Instance.StartDescribe();
+        GameInformation.Instance.Skills.Add(SkillController.Instance.currentSkills[index]);
+        Inventory.GetComponent<InventoryController>().UpdateInventory(Skills[SkillController.Instance.currentSkills[index]], GameInformation.Instance.Skills.FindAll(x => x == SkillController.Instance.currentSkills[index]).Count);
     }
 
     public void Restart(){
@@ -72,18 +79,16 @@ public class UIController : MonoBehaviour
     }
 
     public void UpdateTop(){
+        GameInformation.Instance.characters.RemoveAll(x => x == null);
         GameInformation.Instance.characters.Sort(GameConstant.CompareCharacterPower);
-        try{
-            for (int i = 0; i < pnTop.childCount; i++){
-                pnTop.GetChild(i).GetComponent<Text>().text = "#" + (i+1).ToString() + " " + GameInformation.Instance.characters[i].characterName + "(" + GameInformation.Instance.characters[i].powerPoint.ToString() +")";
-                if (GameInformation.Instance.characters[i].gameObject == player.gameObject)
-                    pnTop.GetChild(i).GetComponent<Text>().color = Color.blue;
-                else
-                    pnTop.GetChild(i).GetComponent<Text>().color = Color.black;
+        for (int i = 0; i < pnTop.childCount; i++){
+            pnTop.GetChild(i).GetComponent<Text>().text = "#" + (i+1).ToString() + " " + GameInformation.Instance.characters[i].characterName + "(" + GameInformation.Instance.characters[i].powerPoint.ToString() +")";
+            if (GameInformation.Instance.characters[i].gameObject == player.gameObject)
+                pnTop.GetChild(i).GetComponent<Text>().color = Color.blue;
+            else
+                pnTop.GetChild(i).GetComponent<Text>().color = Color.black;
             }
-            int playerIndex = GameInformation.Instance.characters.IndexOf(player.GetComponent<CharacterInfo>());
-            txtPlayerTop.GetComponent<Text>().text = "#" + (playerIndex+1).ToString() + " " + player.GetComponent<CharacterInfo>().characterName + "(" + player.GetComponent<CharacterInfo>().powerPoint.ToString() + ")";
-        }
-        catch {}
+        int playerIndex = GameInformation.Instance.characters.IndexOf(player.GetComponent<CharacterInfo>());
+        txtPlayerTop.GetComponent<Text>().text = "#" + (playerIndex+1).ToString() + " " + player.GetComponent<CharacterInfo>().characterName + "(" + player.GetComponent<CharacterInfo>().powerPoint.ToString() + ")";
     }
 }

@@ -22,10 +22,7 @@ public class PetController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (Vector3.Distance(transform.position, parent.position) > 10f){
-            transform.position = parent.position - Vector3.back;
-        }
-        else if (Vector3.Distance(transform.position, parent.position) > 2f){
+        if (Vector3.Distance(transform.position, parent.position) > 2f){
             GetComponent<Rigidbody>().velocity = (parent.position - transform.position) * 2f;
         }
         else

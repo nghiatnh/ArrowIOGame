@@ -36,10 +36,14 @@ public class GameController : MonoBehaviour
             float angle = Random.Range(0, 10) * 36f;
             Vector3 pos = GenerateAt(new int[4]{-300, 300, -300, 300}, 1f);
             if (itemType < 15){
+                // Heart
                 GameObject obj = GameObject.Instantiate(Heart, new Vector3(pos.x, 0.1f, pos.z), new Quaternion(0, angle, 0, 1), Items);
+                obj.GetComponent<ItemInfo>().Health = (int)(obj.GetComponent<ItemInfo>().Health * Random.Range(1f, 1.5f));
             }
             else{
+                // Diamond
                 GameObject obj = GameObject.Instantiate(Diamond, new Vector3(pos.x, 0.1f, pos.z), new Quaternion(0, angle, 0, 1), Items);
+                obj.GetComponent<ItemInfo>().EXP = (int)(obj.GetComponent<ItemInfo>().EXP * Random.Range(1f, 2.5f));
             }
             GameInformation.Instance.ItemCount++;
         }

@@ -81,6 +81,7 @@ public class SkillController
                 break;
             case SKILLS.BULLET_UP: //Done
                 info.status.Add(STATUS.BULLET_UP);
+                info.range = Mathf.Max(7f, info.range - 1f);
                 break;
             case SKILLS.CRIT: //Done
                 info.status.Add(STATUS.CRIT);
@@ -107,15 +108,16 @@ public class SkillController
                 info.status.Add(STATUS.MORE_EXP); 
                 break;
             case SKILLS.RANGE_UP: //Done
-                info.range += 5f; 
+                info.range += 3f; 
+                if (info.range > 22f) info.range -= 2f;
                 break;
             case SKILLS.SPEED_UP: //Done
-                info.speed += 3f;
+                info.speed += 2f;
                 break;
             case SKILLS.THROUGH_WALL: //Done
                 info.status.Add(STATUS.THROUGH_WALL);
                 break;
-            case SKILLS.PET_NINJA: 
+            case SKILLS.PET_NINJA: //Done
                 player.GetComponent<CharacterController>().CreatePet();
                 break;
         }
