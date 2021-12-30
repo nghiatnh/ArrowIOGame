@@ -1246,6 +1246,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1111393962517891486, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
+      propertyPath: ATK
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111393962517891486, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111393962517891486, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2411595822703313482, guid: 58dfb40016b2fb04fb6b696b74a5d86d, type: 3}
       propertyPath: MaxDistance
       value: 25
@@ -22470,8 +22482,8 @@ RectTransform:
   - {fileID: 407804029}
   - {fileID: 383926021}
   - {fileID: 1757434880}
-  - {fileID: 1372811912}
   - {fileID: 1637336226}
+  - {fileID: 1372811912}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32226,7 +32238,7 @@ RectTransform:
   - {fileID: 1336111133}
   - {fileID: 749134089}
   m_Father: {fileID: 943462254}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -39300,7 +39312,7 @@ GameObject:
   - component: {fileID: 1637336227}
   - component: {fileID: 1637336230}
   m_Layer: 5
-  m_Name: btnExit_1
+  m_Name: btnInventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39319,7 +39331,7 @@ RectTransform:
   m_Children:
   - {fileID: 577479560}
   m_Father: {fileID: 943462254}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -42188,7 +42200,7 @@ RectTransform:
   m_GameObject: {fileID: 1757434879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children:
   - {fileID: 367268565}
   - {fileID: 1159318888}

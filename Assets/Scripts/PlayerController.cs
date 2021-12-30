@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void ChangeSkin(){
+        if (GameInformation.Instance.PlayerSkin == null) return;
         Destroy(Skin.GetChild(0).gameObject);
         GameObject skin = Instantiate(GameInformation.Instance.PlayerSkin, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), Skin);
         skin.transform.localPosition = new Vector3(0, 0, 0);

@@ -1776,6 +1776,8 @@ MonoBehaviour:
   Skins:
   - {fileID: 5974052290376529811, guid: 7225c6a0a6a32a04295b30485c836cab, type: 3}
   - {fileID: 3024045318464776891, guid: 055eceac876cde248844dbec69f36af0, type: 3}
+  - {fileID: 5974052290376529811, guid: 322bc810b530d034e8686197056c7dda, type: 3}
+  - {fileID: 5974052290376529811, guid: 9bfe79d5830eb8745ac91329d3c8195b, type: 3}
 --- !u!1 &2145943774
 GameObject:
   m_ObjectHideFlags: 0

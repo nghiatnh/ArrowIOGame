@@ -87,7 +87,7 @@ public class SkillController
                 info.status.Add(STATUS.CRIT);
                 break;
             case SKILLS.DEF_UP: //Done
-                info.DEF += 4;
+                info.DEF += 6;
                 break;
             case SKILLS.HP_UP: //Done
                 info.maxHealth += 20;

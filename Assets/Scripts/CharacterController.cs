@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
     public GameObject pet;
     public GameObject Gates;
     public LayerMask gateLayerMask;
+    public LayerMask playerLayerMask;
     public BoxCollider getItemCollider;
     public delegate void AfterDie(GameObject killer);
     public AfterDie afterDie;
@@ -23,22 +24,28 @@ public class CharacterController : MonoBehaviour
 
     void Start(){
         GameInformation.Instance.characters.Add(GetComponent<CharacterInfo>());
+        if (Gates == null) Gates = GameObject.Find("Grid").transform.FindChild("Gate").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<CharacterInfo>().health <= 0) Die();
+        if (GetComponent<CharacterInfo>().health <= 0) {
+            return;
+        }
+        // Check on gate
         bool isCollide = Physics.Raycast(transform.position, Vector3.down, 1f, gateLayerMask);
         if (isCollide && !IsOnGate){
-            IsOnGate = true;
             lastTimeOnGate = Time.realtimeSinceStartup;
+            IsOnGate = true;
         }
         else if (IsOnGate && !isCollide) {
             IsOnGate = false;
         }
-        else if (isCollide && IsOnGate && Time.realtimeSinceStartup - lastTimeOnGate >= 2f)
-            OnGate();
+        else if (isCollide && IsOnGate && Time.realtimeSinceStartup - lastTimeOnGate >= 2f){
+            if (OnGate())
+                lastTimeOnGate = Time.realtimeSinceStartup;
+        }
     }
 
     void OnTriggerEnter(Collider collider){
@@ -64,11 +71,7 @@ public class CharacterController : MonoBehaviour
     
     // Call every frame when die
     public void Die(){
-        if (transform.eulerAngles.x > 270 || transform.eulerAngles.x == 0f)
-            transform.rotation = Quaternion.Euler(new Vector3(Mathf.FloorToInt(transform.eulerAngles.x - 5) / 5 * 5, transform.eulerAngles.y, 0));
-        
-        if (Time.realtimeSinceStartup - startDeadTime >= 1f)
-            afterDie.Invoke(killer);
+        afterDie.Invoke(killer);
     }
 
     // Create a bullet
@@ -117,6 +120,7 @@ public class CharacterController : MonoBehaviour
             
             killer = attacker;
             startDeadTime = Time.realtimeSinceStartup;
+            GetComponent<Animator>().SetTrigger("Die");
         }
 
         // Blood Sucking
@@ -130,10 +134,12 @@ public class CharacterController : MonoBehaviour
         obj.GetComponent<CharacterInfo>().ATK = GetComponent<CharacterInfo>().ATK / 6;
     }
 
-    public void OnGate(){
+    public bool OnGate(){
         int rd = Random.Range(0, Gates.transform.childCount);
         Transform gate = Gates.transform.GetChild(rd);
+        if (Physics.BoxCast(gate.position, Vector3.one, Vector3.up, Quaternion.Euler(0,0,0),  2f, playerLayerMask)) return false;
         gate.GetComponent<AudioSource>().Play();
         transform.position = gate.position;
+        return true;
     }
 }

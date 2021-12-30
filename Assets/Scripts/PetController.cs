@@ -22,9 +22,10 @@ public class PetController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if (Vector3.Distance(transform.position, parent.position) > 2f){
-            GetComponent<Rigidbody>().velocity = (parent.position - transform.position) * 2f;
-        }
+        if (Vector3.Distance(transform.position, parent.position) > 4f)
+            transform.position = new Vector3(parent.position.x - parent.transform.forward.x, transform.position.y, parent.position.z - parent.transform.forward.z) ;
+        else if (Vector3.Distance(transform.position, parent.position) > 2f)
+            GetComponent<Rigidbody>().velocity = new Vector3(parent.position.x - transform.position.x, 0, parent.position.z - transform.position.z) * 2f;
         else
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         
@@ -38,11 +39,6 @@ public class PetController : MonoBehaviour
         if (Time.realtimeSinceStartup - lastTimeAttack >= 0.5f && target != null){
             Attack();
             lastTimeAttack = Time.realtimeSinceStartup;
-        }
-
-        if (GetComponent<CharacterInfo>().health > 0){
-            parent.GetComponent<CharacterInfo>().GainHealth(GetComponent<CharacterInfo>().health);
-            GetComponent<CharacterInfo>().health = 0;
         }
     }
 

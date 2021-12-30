@@ -7,13 +7,14 @@ public class HealthController : MonoBehaviour
     public Transform cam;
     public CharacterInfo playerInfo;
     public Gradient healthColor;
-    private Transform healthSprite;
-    private float maxScale;
+    [SerializeField] private Transform healthSprite;
+    [SerializeField] private Transform healthBorder;
+    [SerializeField] private Transform healthBackground;
+    [SerializeField] private Transform healthScale;
     // Start is called before the first frame update
     void Start()
     {
         playerInfo = transform.parent.GetComponent<CharacterInfo>();
-        healthSprite = transform.Find("health");
         updateHealth();
         if (cam == null){
             cam = GameObject.Find("Main Camera").transform;
@@ -23,8 +24,8 @@ public class HealthController : MonoBehaviour
     // Update is called once per frame
     void Update(){
         healthSprite.GetComponent<SpriteRenderer>().color = healthColor.Evaluate(playerInfo.health / playerInfo.maxHealth);
-        healthSprite.localScale = new Vector3(maxScale * playerInfo.health / playerInfo.maxHealth, healthSprite.transform.localScale.y, healthSprite.transform.localScale.z);
-        healthSprite.localPosition = new Vector3(-(maxScale - healthSprite.localScale.x)/2, 0, 0);
+        healthSprite.localScale = new Vector3(healthBackground.localScale.x * playerInfo.health / playerInfo.maxHealth, healthSprite.transform.localScale.y, healthSprite.transform.localScale.z);
+        healthSprite.localPosition = new Vector3(-(healthBackground.localScale.x - healthSprite.localScale.x)/2, 0, 0);
     }
 
     void LateUpdate()
@@ -33,7 +34,6 @@ public class HealthController : MonoBehaviour
     }
 
     public void updateHealth(){
-        transform.localScale = new Vector3(0.0005f * playerInfo.maxHealth, transform.localScale.y, transform.localScale.z);
-        maxScale = transform.Find("background").transform.localScale.x;
+        healthScale.localScale = new Vector3(0.0005f * playerInfo.maxHealth, healthScale.localScale.y, healthScale.localScale.z);
     }
 }
