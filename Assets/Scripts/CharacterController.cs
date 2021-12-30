@@ -12,6 +12,7 @@ public class CharacterController : MonoBehaviour
     public GameObject Gates;
     public LayerMask gateLayerMask;
     public LayerMask playerLayerMask;
+    public LayerMask wallLayerMask;
     public BoxCollider getItemCollider;
     public delegate void AfterDie(GameObject killer);
     public AfterDie afterDie;
@@ -24,7 +25,7 @@ public class CharacterController : MonoBehaviour
 
     void Start(){
         GameInformation.Instance.characters.Add(GetComponent<CharacterInfo>());
-        if (Gates == null) Gates = GameObject.Find("Grid").transform.FindChild("Gate").gameObject;
+        if (Gates == null) Gates = GameObject.Find("Grid").transform.Find("Gate").gameObject;
     }
 
     // Update is called once per frame
@@ -46,6 +47,9 @@ public class CharacterController : MonoBehaviour
             if (OnGate())
                 lastTimeOnGate = Time.realtimeSinceStartup;
         }
+        // Check through wall
+        if (GetComponent<CharacterInfo>().status.Contains(STATUS.THROUGH_WALL))
+            ThroughWall(GetComponent<Rigidbody>().velocity / GetComponent<CharacterInfo>().speed);
     }
 
     void OnTriggerEnter(Collider collider){
@@ -131,15 +135,20 @@ public class CharacterController : MonoBehaviour
     public void CreatePet(){
         GameObject obj = Instantiate(pet, transform.position - new Vector3(-1, 0, 0), transform.rotation);
         obj.GetComponent<PetController>().parent = transform;
-        obj.GetComponent<CharacterInfo>().ATK = GetComponent<CharacterInfo>().ATK / 6;
+        obj.GetComponent<CharacterInfo>().ATK = GetComponent<CharacterInfo>().ATK / 9;
     }
 
     public bool OnGate(){
         int rd = Random.Range(0, Gates.transform.childCount);
         Transform gate = Gates.transform.GetChild(rd);
-        if (Physics.BoxCast(gate.position, Vector3.one, Vector3.up, Quaternion.Euler(0,0,0),  2f, playerLayerMask)) return false;
+        if (Physics.BoxCast(gate.position, Vector3.one * 3f, Vector3.up, Quaternion.Euler(0,0,0), 2f, playerLayerMask)) return false;
         gate.GetComponent<AudioSource>().Play();
         transform.position = gate.position;
         return true;
+    }
+
+    private void ThroughWall(Vector3 moveDir){
+        if (Physics.Raycast(gameObject.transform.position, moveDir, 0.55f, wallLayerMask) && !Physics.Raycast(transform.position + moveDir * 2f, moveDir, 1f, wallLayerMask))
+            transform.position += moveDir * 2f;
     }
 }

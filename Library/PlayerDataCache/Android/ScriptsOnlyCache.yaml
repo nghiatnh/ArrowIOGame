@@ -17,10 +17,10 @@ ScriptsOnlyBuild:
     - PlayerMovement
     - SkinController
     - SpikeController
+    - StartSceneController
     - UIController
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -61,7 +61,6 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnimatorStateTransitionInspector
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
@@ -133,61 +132,61 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1740}
     - Class: 114
-      Script: {instanceID: 2238}
+      Script: {instanceID: 2240}
     - Class: 114
-      Script: {instanceID: 2322}
+      Script: {instanceID: 2324}
     - Class: 114
-      Script: {instanceID: 2526}
+      Script: {instanceID: 2528}
     - Class: 114
-      Script: {instanceID: 2602}
+      Script: {instanceID: 2604}
     - Class: 114
-      Script: {instanceID: 2648}
+      Script: {instanceID: 2650}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2752}
     - Class: 114
-      Script: {instanceID: 2758}
+      Script: {instanceID: 2760}
     - Class: 114
-      Script: {instanceID: 2814}
+      Script: {instanceID: 2816}
     - Class: 114
-      Script: {instanceID: 2820}
+      Script: {instanceID: 2822}
     - Class: 114
-      Script: {instanceID: 2878}
+      Script: {instanceID: 2880}
     - Class: 114
-      Script: {instanceID: 2908}
+      Script: {instanceID: 2910}
     - Class: 114
-      Script: {instanceID: 2936}
+      Script: {instanceID: 2938}
     - Class: 114
-      Script: {instanceID: 3080}
+      Script: {instanceID: 3082}
     - Class: 114
-      Script: {instanceID: 3134}
+      Script: {instanceID: 3136}
     - Class: 114
-      Script: {instanceID: 3158}
+      Script: {instanceID: 3160}
     - Class: 114
-      Script: {instanceID: 3190}
+      Script: {instanceID: 3192}
     - Class: 114
-      Script: {instanceID: 3230}
+      Script: {instanceID: 3232}
     - Class: 114
-      Script: {instanceID: 3298}
+      Script: {instanceID: 3300}
     - Class: 114
-      Script: {instanceID: 3348}
+      Script: {instanceID: 3350}
     - Class: 114
-      Script: {instanceID: 3494}
+      Script: {instanceID: 3496}
     - Class: 114
-      Script: {instanceID: 3646}
+      Script: {instanceID: 3648}
     - Class: 114
-      Script: {instanceID: 4096}
+      Script: {instanceID: 4098}
     - Class: 114
-      Script: {instanceID: 4110}
+      Script: {instanceID: 4112}
     - Class: 114
-      Script: {instanceID: 4752}
+      Script: {instanceID: 4754}
     - Class: 114
-      Script: {instanceID: 4774}
+      Script: {instanceID: 4776}
     - Class: 114
-      Script: {instanceID: 4878}
+      Script: {instanceID: 4880}
     - Class: 114
-      Script: {instanceID: 4922}
+      Script: {instanceID: 4924}
     - Class: 114
-      Script: {instanceID: 4956}
+      Script: {instanceID: 4958}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -258,25 +257,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1740}
     - Class: 114
-      Script: {instanceID: 2322}
+      Script: {instanceID: 2324}
     - Class: 114
-      Script: {instanceID: 2474}
+      Script: {instanceID: 2476}
     - Class: 114
-      Script: {instanceID: 2648}
+      Script: {instanceID: 2650}
     - Class: 114
-      Script: {instanceID: 2758}
+      Script: {instanceID: 2760}
     - Class: 114
-      Script: {instanceID: 2936}
+      Script: {instanceID: 2938}
     - Class: 114
-      Script: {instanceID: 2980}
+      Script: {instanceID: 2982}
     - Class: 114
-      Script: {instanceID: 3134}
+      Script: {instanceID: 3136}
     - Class: 114
-      Script: {instanceID: 3230}
+      Script: {instanceID: 3232}
     - Class: 114
-      Script: {instanceID: 3782}
+      Script: {instanceID: 3784}
     - Class: 114
-      Script: {instanceID: 4752}
+      Script: {instanceID: 4754}
+    - Class: 114
+      Script: {instanceID: 4880}
+    - Class: 114
+      Script: {instanceID: 1335006}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -470,7 +473,7 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
-      Hash: 20bc7252f68d7502f663311c11fac512
+      Hash: 42e498c90c99b98700cf2dabcd020391
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIController
@@ -662,7 +665,7 @@ ScriptsOnlyBuild:
     className: AutoExposure
   - hash:
       serializedVersion: 2
-      Hash: 6c0f584542cbdc3f775b36e1fc40d9e5
+      Hash: 9cac8edd45a0a0c69c5c9c4c17667b32
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterController
@@ -980,10 +983,16 @@ ScriptsOnlyBuild:
     className: AmbientOcclusion
   - hash:
       serializedVersion: 2
-      Hash: c2b45dfca1aa4833c30195b0d5ae526c
+      Hash: 95f6a3599f2401a73886faf42711c175
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyController
+  - hash:
+      serializedVersion: 2
+      Hash: 70d42277306fac9decb6c7df62c515f1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StartSceneController
   platform: 13
   scenePathNames:
   - Assets/Scenes/StartScene.unity

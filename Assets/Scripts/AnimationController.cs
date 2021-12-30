@@ -20,6 +20,12 @@ public class AnimationController : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    public void Restart(GameObject pnRestart){
+        pnRestart.SetActive(false);
+        GameInformation.Instance.Reload();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void OnPlayerNameChange(InputField text){
         GameInformation.Instance.PlayerName = text.text;
     }

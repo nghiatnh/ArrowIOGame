@@ -455,6 +455,9 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
   getItemCollider: {fileID: 5916057641993188342}
 --- !u!65 &5661863486065293344
 BoxCollider:

@@ -14,7 +14,6 @@ public class UIController : MonoBehaviour
     public Transform pnSkill;
     public Transform player;
     public Transform txtDescription;
-    public GameObject pnRestart;
     private int queueSkillCount = 0;
     private bool isShowSkill = false;
     private float lastUpdateTop = 0f;
@@ -72,16 +71,11 @@ public class UIController : MonoBehaviour
         Inventory.GetComponent<InventoryController>().UpdateInventory(Skills[SkillController.Instance.currentSkills[index]], GameInformation.Instance.Skills.FindAll(x => x == SkillController.Instance.currentSkills[index]).Count);
     }
 
-    public void Restart(){
-        pnRestart.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameInformation.Instance.Reload();
-    }
-
     public void UpdateTop(){
         GameInformation.Instance.characters.RemoveAll(x => x == null);
+        if (GameInformation.Instance.characters.Count < pnTop.childCount) return;
         GameInformation.Instance.characters.Sort(GameConstant.CompareCharacterPower);
-        for (int i = 0; i < pnTop.childCount; i++){
+        for (int i = 0; i < pnTop.childCount - 1; i++){
             pnTop.GetChild(i).GetComponent<Text>().text = "#" + (i+1).ToString() + " " + GameInformation.Instance.characters[i].characterName + "(" + GameInformation.Instance.characters[i].powerPoint.ToString() +")";
             if (GameInformation.Instance.characters[i].gameObject == player.gameObject)
                 pnTop.GetChild(i).GetComponent<Text>().color = Color.blue;

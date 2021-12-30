@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (info.EXP >= info.MAX_EXP && info.level < GameConstant.MAX_EXP_LEVEL.Length - 1){
             info.level++;
             txtLevel.text = "LV " + info.level;
-            GameObject.Find("GameController").GetComponent<UIController>().AddQueueSkill();
+            GameObject.Find("UIController").GetComponent<UIController>().AddQueueSkill();
             info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level];
             int exp = info.EXP;
             info.EXP = 0;

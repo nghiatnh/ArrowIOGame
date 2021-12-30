@@ -314,6 +314,9 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &7341475534256576091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +395,9 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
   getItemCollider: {fileID: 2784362463990098069}
 --- !u!65 &9003060734947115589
 BoxCollider:

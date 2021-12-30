@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     public GameObject player;
     public GameObject bullet;
     public LayerMask playerLayerMask;
+    public LayerMask wallLayerMask;
 
     private float lastTimeAttack = 0f;
     private float lastTimeMove = 0f;
@@ -53,7 +54,7 @@ public class EnemyController : MonoBehaviour
         Vector3 curPos = transform.position;
         int dirX = Random.Range(-1, 2);
         int dirZ = Random.Range(-1, 2);
-        while (Physics.Raycast(curPos, new Vector3(dirX, 0, dirZ), 0.7f, 3 /*Wall*/)){
+        while (!GetComponent<CharacterInfo>().status.Contains(STATUS.THROUGH_WALL) && Physics.Raycast(curPos, new Vector3(dirX, 0, dirZ), 0.7f, wallLayerMask)){
             dirX = Random.Range(-1, 2);
             dirZ = Random.Range(-1, 2);
         }

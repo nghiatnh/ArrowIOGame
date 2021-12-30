@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour
             Vector3 pos = GenerateAt(new int[4]{-300, 300, -300, 300}, 0.7f);
             GameObject enemy = GameObject.Instantiate(Enemy, new Vector3(pos.x, 0.1f, pos.z), new Quaternion(0, 0, 0, 1), Enemies);
             enemy.GetComponent<CharacterInfo>().level = player.GetComponent<CharacterInfo>().level;
-            enemy.GetComponent<CharacterInfo>().speed = Mathf.Max(2.5f, enemy.GetComponent<CharacterInfo>().level - 0.1f); 
+            enemy.GetComponent<CharacterInfo>().speed = Mathf.Max(2.5f, enemy.GetComponent<CharacterInfo>().speed - enemy.GetComponent<CharacterInfo>().level * 0.1f); 
             int indexName = Random.Range(0, names.Count);
             string name = names[indexName];
             names.RemoveAt(indexName);
