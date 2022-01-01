@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec47659a03aa76242afcec6d082454b8, type: 3}
+  m_Name: ThroughWall
+  m_EditorClassIdentifier: 
+  SkillName: Through Wall
+  Description: You can THROUGH the wall now!
+  SkillTag: 5
+  SkillImage: {fileID: -6793822770884829338, guid: c09e181405fa3b5478ef6bc5dbb5c7a0, type: 3}

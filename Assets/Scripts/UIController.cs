@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {
     public Transform Inventory;
-    public Sprite[] Skills;
+    public SkilInfo[] Skills;
     public Transform pnTop;
     public GameObject txtPlayerTop;
     public Transform pnSkill;
@@ -36,9 +36,9 @@ public class UIController : MonoBehaviour
         }
         if (SkillController.Instance.isRandom)
         {    
-            SkillController.Instance.RandomSkill();
+            SkillController.Instance.RandomSkill(Skills);
             for (int i = 0; i < pnSkill.childCount; i++){
-                pnSkill.GetChild(i).GetComponent<Image>().sprite = Skills[SkillController.Instance.currentSkills[i]];
+                pnSkill.GetChild(i).GetComponent<Image>().sprite = SkillController.Instance.currentSkills[i].SkillImage;
             }
         }
 
@@ -62,13 +62,13 @@ public class UIController : MonoBehaviour
         if (SkillController.Instance.isRandom) return;
         isShowSkill = false;
         pnSkill.gameObject.SetActive(false);
-        SKILLS selected = (SKILLS)GameConstant.LIST_SKILL.GetValue(SkillController.Instance.currentSkills[index]);
-        SkillController.ChooseSkill(selected, player);
+        SkilInfo selected = SkillController.Instance.currentSkills[index];
+        SkillController.ChooseSkill(selected.SkillTag, player);
         txtDescription.gameObject.SetActive(true);
-        txtDescription.GetComponent<Text>().text = GameConstant.SKILL_DESCRIPTIONS[selected];
+        txtDescription.GetComponent<Text>().text = selected.Description;
         SkillController.Instance.StartDescribe();
-        GameInformation.Instance.Skills.Add(SkillController.Instance.currentSkills[index]);
-        Inventory.GetComponent<InventoryController>().UpdateInventory(Skills[SkillController.Instance.currentSkills[index]], GameInformation.Instance.Skills.FindAll(x => x == SkillController.Instance.currentSkills[index]).Count);
+        GameInformation.Instance.Skills.Add(selected.SkillTag);
+        Inventory.GetComponent<InventoryController>().UpdateInventory(selected);
     }
 
     public void UpdateTop(){

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249ee4626b6bbb84899188f12a6d0b24, type: 3}
+  m_Name: Skin 4
+  m_EditorClassIdentifier: 
+  Name: Character 4
+  Description: This is description
+  SkinObject: {fileID: 5974052290376529811, guid: 322bc810b530d034e8686197056c7dda, type: 3}
+  Skills:
+  - {fileID: 11400000, guid: f0754049822e62e46a7faa1594694402, type: 2}
+  - {fileID: 11400000, guid: 4e5c5b2ed1cd7f94695be3aff4aca15e, type: 2}
+  - {fileID: 11400000, guid: 16868842ab73ae04999d3e2dea2dd12f, type: 2}

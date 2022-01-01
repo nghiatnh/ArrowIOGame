@@ -58,9 +58,11 @@
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameConstant.cs" />
      <Compile Include="Assets\Scripts\AnimationController.cs" />
+     <Compile Include="Assets\Scripts\StartSceneController.cs" />
      <Compile Include="Assets\Scripts\SkillController.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\StartSceneController.cs" />
+     <Compile Include="Assets\Scripts\SkinInfo.cs" />
+     <Compile Include="Assets\Scripts\SkilInfo.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\UnityProjects\2020.3.19f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

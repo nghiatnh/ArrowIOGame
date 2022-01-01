@@ -13,7 +13,7 @@ public class SkillController
     }
 
     #region public Properties
-    public int[] currentSkills = new int[3];
+    public SkilInfo[] currentSkills = new SkilInfo[3];
     public bool isRandom = false;
     public bool isDescribe = false;
     #endregion
@@ -40,18 +40,20 @@ public class SkillController
         }
     }
 
-    public void RandomSkill(){
+    public void RandomSkill(SkilInfo[] skills){
         if (Time.realtimeSinceStartup - startRandomTime >= 1.5f) {
             isRandom = false;
             return;
         }
+        // Copy skills to the list for remove in the future
         List<int> ListSkill = new List<int>();
-        for (int i = 0; i < Enum.GetValues(typeof(SKILLS)).Length; i++){
+        for (int i = 0; i < skills.Length; i++){
             ListSkill.Add(i);
         }
+        // Select random and remove it
         for (int i = 0; i < 3; i++){
             int index = UnityEngine.Random.Range(0, ListSkill.Count);
-            currentSkills[i] = ListSkill[index];
+            currentSkills[i] = skills[index];
             ListSkill.RemoveAt(index);
         }
     }
