@@ -15,4 +15,4 @@ MonoBehaviour:
   SkillName: Range Up
   Description: You RANGE is extended!
   SkillTag: 1
-  SkillImage: {fileID: -7637036698441226068, guid: c09e181405fa3b5478ef6bc5dbb5c7a0, type: 3}
+  SkillImage: {fileID: -7637036698441226068, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}

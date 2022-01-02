@@ -15,4 +15,4 @@ MonoBehaviour:
   SkillName: Through Wall
   Description: You can THROUGH the wall now!
   SkillTag: 5
-  SkillImage: {fileID: -6793822770884829338, guid: c09e181405fa3b5478ef6bc5dbb5c7a0, type: 3}
+  SkillImage: {fileID: -6793822770884829338, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}

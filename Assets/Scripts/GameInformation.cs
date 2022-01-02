@@ -16,7 +16,7 @@ public class GameInformation
     public int ItemCount = 0;
     public int EnemyCount = 0;
     public string PlayerName = "character";
-    public GameObject PlayerSkin;
+    public SkinInfo PlayerSkin;
     public List<CharacterInfo> characters = new List<CharacterInfo>();
     public List<SKILLS> Skills = new List<SKILLS>();
 

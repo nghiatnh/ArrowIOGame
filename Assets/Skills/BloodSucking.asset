@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: Blood Sucking
   Description: You will get HEALTH when you attack accurately!
-  SkillTag: 0
+  SkillTag: 3
   SkillImage: {fileID: -3921087108199702177, guid: 0c7a007db02d7cb4b8596de22a32b3c0, type: 3}

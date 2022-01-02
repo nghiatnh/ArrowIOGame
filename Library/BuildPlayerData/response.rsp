@@ -5,6 +5,7 @@
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\Unity.Timeline.dll"
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\Unity.TextMeshPro.dll"
 -a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\UnityEngine.UI.dll"
+-a="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies\BestHTTP.dll"
 -a="C:\Users\nghia\ArrowIOGame\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll"
 -s="D:\UnityProjects\2020.3.19f1\Editor\Data\Managed\UnityEngine"
 -s="C:\Users\nghia\ArrowIOGame\Library\PlayerScriptAssemblies"

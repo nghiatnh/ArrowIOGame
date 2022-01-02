@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChangeSkinScene.unity
     guid: 9add6d45f554593499a749181a19fbe2
+  - enabled: 1
+    path: Assets/Scenes/MainOnlineScene.unity
+    guid: 9fe3654bfb40c9b42b8cd8040f340d32
   m_configObjects: {}

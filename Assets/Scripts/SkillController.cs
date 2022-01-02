@@ -53,7 +53,7 @@ public class SkillController
         // Select random and remove it
         for (int i = 0; i < 3; i++){
             int index = UnityEngine.Random.Range(0, ListSkill.Count);
-            currentSkills[i] = skills[index];
+            currentSkills[i] = skills[ListSkill[index]];
             ListSkill.RemoveAt(index);
         }
     }

@@ -20,6 +20,11 @@ public class AnimationController : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    public void StartOnline(){
+        if (GameInformation.Instance.PlayerName == string.Empty) return;
+        SceneManager.LoadScene("MainOnlineScene");
+    }
+
     public void Restart(GameObject pnRestart){
         pnRestart.SetActive(false);
         GameInformation.Instance.Reload();
