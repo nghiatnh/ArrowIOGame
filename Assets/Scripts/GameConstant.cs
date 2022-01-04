@@ -53,3 +53,11 @@ public enum STATUS
     MORE_EXP,
     THROUGH_WALL,
 }
+
+public enum GAME_MODE{
+    OFFLINE,
+    RANK,
+    BATTLE,
+    TEAMFIGHT,
+    VS5
+}

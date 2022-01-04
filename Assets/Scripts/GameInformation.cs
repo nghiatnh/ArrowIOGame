@@ -19,6 +19,7 @@ public class GameInformation
     public SkinInfo PlayerSkin;
     public List<CharacterInfo> characters = new List<CharacterInfo>();
     public List<SKILLS> Skills = new List<SKILLS>();
+    public GAME_MODE gameMode = GAME_MODE.OFFLINE;
 
     public void Reload(){
         instance = new GameInformation() {PlayerName = instance.PlayerName, PlayerSkin = instance.PlayerSkin};

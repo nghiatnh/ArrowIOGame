@@ -13,6 +13,7 @@ TagManager:
   - Spike
   - Gate
   - Pet
+  - Controller
   layers:
   - Default
   - TransparentFX

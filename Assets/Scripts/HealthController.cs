@@ -17,7 +17,7 @@ public class HealthController : MonoBehaviour
         playerInfo = transform.parent.GetComponent<CharacterInfo>();
         updateHealth();
         if (cam == null){
-            cam = GameObject.Find("Main Camera").transform;
+            cam = GameObject.Find("MainCam").transform;
         }
     }
 

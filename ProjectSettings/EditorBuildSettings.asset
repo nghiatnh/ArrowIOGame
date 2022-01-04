@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: cc1c138d16dbe034582676250ac6a396
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/BattleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/ChangeSkinScene.unity
     guid: 9add6d45f554593499a749181a19fbe2
-  - enabled: 1
-    path: Assets/Scenes/MainOnlineScene.unity
+  - enabled: 0
+    path: Assets/Scenes/OnlineScene.unity
     guid: 9fe3654bfb40c9b42b8cd8040f340d32
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 21faf15a4868da9499b3e85e90d9ecea
   m_configObjects: {}

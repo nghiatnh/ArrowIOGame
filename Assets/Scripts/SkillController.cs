@@ -100,7 +100,7 @@ public class SkillController
                 info.status.Add(STATUS.KILL_HP_UP);
                 break;
             case SKILLS.MAGNET: //Done
-                BoxCollider collider = player.GetComponent<CharacterController>().getItemCollider;
+                BoxCollider collider = player.GetComponent<CharacterOfflineController>().getItemCollider;
                 collider.size = new Vector3(collider.size.x * 2f, collider.size.y, collider.size.z * 2f);
                 break;
             case SKILLS.MAKE_SPIKE: //Done
@@ -120,7 +120,7 @@ public class SkillController
                 info.status.Add(STATUS.THROUGH_WALL);
                 break;
             case SKILLS.PET_NINJA: //Done
-                player.GetComponent<CharacterController>().CreatePet();
+                player.GetComponent<CharacterOfflineController>().CreatePet();
                 break;
         }
     }

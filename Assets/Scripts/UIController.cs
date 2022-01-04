@@ -21,13 +21,15 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (player == null)
-            player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null) {
+            //player = GameObject.FindGameObjectWithTag("Player").transform;
+            return;
+        }
         if (queueSkillCount > 0 && isShowSkill == false){
             queueSkillCount--;
             isShowSkill = true;
@@ -49,7 +51,7 @@ public class UIController : MonoBehaviour
             txtDescription.gameObject.SetActive(false);
         }
         if (Time.realtimeSinceStartup - lastUpdateTop >= 1f){
-            UpdateTop();
+            //UpdateTop();
             lastUpdateTop = Time.realtimeSinceStartup;
         }
     }

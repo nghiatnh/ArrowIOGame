@@ -3863,12 +3863,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1755291276}
-        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 2
+        m_TargetAssemblyTypeName: EventController, Assembly-CSharp
+        m_MethodName: StartOffline
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 2141424178}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
