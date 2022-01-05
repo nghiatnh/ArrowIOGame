@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class OnlineUIController : MonoBehaviour
 {
     public GameObject moveJoystick;
     public GameObject rotateJoystick;
+
+    [SerializeField] private GameObject btnExit;
     [SerializeField] private GameObject pnRestart;
     [SerializeField] private Transform experienceBar;
     [SerializeField] private Text txtLevel;
@@ -16,6 +19,8 @@ public class OnlineUIController : MonoBehaviour
         moveJoystick = GameObject.Find("MoveJoystick");
         rotateJoystick = GameObject.Find("RotateJoystick");
         experienceBar = GameObject.Find("ExperienceBar").transform;
+        btnExit = GameObject.Find("btnExit");
+        btnExit.GetComponent<Button>().onClick.AddListener(KillPlayer);
         txtLevel = GameObject.Find("txtLevel").GetComponent<Text>();
         pnRestart.SetActive(false);
     }
@@ -32,5 +37,9 @@ public class OnlineUIController : MonoBehaviour
 
     public void ShowPanelRestart(){
         pnRestart.SetActive(true);
+    }
+
+    public void KillPlayer(){
+        GetComponent<OnlineController>().Player.GetComponent<CharacterOnlineController>().gameObject.GetPhotonView().RPC("GetDamage", RpcTarget.All, 1000f, GetComponent<OnlineController>().Player.GetPhotonView().ViewID);
     }
 }

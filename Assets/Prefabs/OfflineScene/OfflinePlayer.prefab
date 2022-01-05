@@ -356,7 +356,7 @@ MonoBehaviour:
     m_Bits: 128
   cam: {fileID: 0}
   Skin: {fileID: 315908396388940096}
-  bullet: {fileID: 8654892915708967553, guid: c366ba4ebed7d794dafa0191dff825ed, type: 3}
+  bullet: {fileID: 8654892915708967553, guid: 29c29e44aa31dca46867e9b4c6957a35, type: 3}
   UI: {fileID: 0}
   rotateJoystick: {fileID: 0}
   moveJoystick: {fileID: 0}

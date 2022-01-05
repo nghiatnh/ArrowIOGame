@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de838640e7d786f4d9932b034bf99fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Heart: {fileID: 0}
-  Diamond: {fileID: 0}
-  Enemy: {fileID: 0}
+  Heart: {fileID: 6378533085991284624, guid: 96d2a2c5568c7194bb972276b93c3e6f, type: 3}
+  Diamond: {fileID: 1730599945680036316, guid: 3781c0b1a1bc0bf44b62338be49a9232, type: 3}
   Player: {fileID: 8654892915708967553, guid: 072e79b7250f0334488030ea4bb9e0c3, type: 3}
   Items: {fileID: 0}
 --- !u!114 &762424231306959427

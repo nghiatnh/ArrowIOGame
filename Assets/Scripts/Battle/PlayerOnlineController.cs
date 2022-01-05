@@ -20,6 +20,7 @@ public class PlayerOnlineController : MonoBehaviour
     public CharacterInfo info;
     public GameObject levelUp;
     public GameObject Name;
+    public SkinInfo[] Skins;
     
     private Stack<Vector3> queuePosition = new Stack<Vector3>();
     private Stack<Quaternion> queueRotation = new Stack<Quaternion>();
@@ -41,13 +42,12 @@ public class PlayerOnlineController : MonoBehaviour
             UI = GameObject.FindGameObjectWithTag("Controller").GetComponent<OnlineUIController>();
         if (cam == null)
             cam = GameObject.Find("MainCam");
-        view = GetComponent<PhotonView>();
+        view = gameObject.GetPhotonView();
         IsMine = view.IsMine;
         if (!IsMine)
             NotMine();
         else
             Mine();
-        view.RPC("ChangeSkin", RpcTarget.All);
     }
     void Update()
     {
@@ -89,27 +89,32 @@ public class PlayerOnlineController : MonoBehaviour
     void OnTriggerEnter(Collider collider){
         if (!IsMine) return;
         if (collider.CompareTag("Heart") || collider.CompareTag("Diamond"))
-            CollectItem(collider.tag, collider.gameObject);
+            view.RPC("CollectItem", RpcTarget.All, collider.tag, collider.gameObject.GetPhotonView().ViewID);
     }
 
-    void CollectItem(string itemName, GameObject obj){
+    [PunRPC]
+    void CollectItem(string itemName, int objID){
+        GameObject obj = PhotonNetwork.GetPhotonView(objID).gameObject;
         switch(itemName){
             case "Heart":
                 collectItemSource.Play();
                 GameInformation.Instance.ItemCount--;
                 info.GainHealth(obj.GetComponent<ItemInfo>().Health);
-                Destroy(obj);
+                obj.GetComponent<ItemOnlineController>().Collected();
                 break;
             case "Diamond":
                 collectItemSource.Play();
-                GainEXP(obj.GetComponent<ItemInfo>().EXP);
-                Destroy(obj);
+                if (IsMine)
+                    GainMineEXP(obj.GetComponent<ItemInfo>().EXP);
+                else
+                    GainOtherEXP(obj.GetComponent<ItemInfo>().EXP);
+                obj.GetComponent<ItemOnlineController>().Collected();
                 GameInformation.Instance.ItemCount--;
                 break;
         }
     }
 
-    public void GainEXP(int EXP){
+    public void GainMineEXP(int EXP){
         info.EXP += EXP;
         UI.UpdateExperience((float)info.EXP / info.MAX_EXP, "LV " + info.level);
         if (info.EXP >= info.MAX_EXP && info.level < GameConstant.MAX_EXP_LEVEL.Length - 1){
@@ -122,30 +127,57 @@ public class PlayerOnlineController : MonoBehaviour
             UI.ShowLevelUp(levelUp);
             levelUpSource.Play();
 
-            GainEXP(exp - GameConstant.MAX_EXP_LEVEL[info.level - 1]);     
+            GainMineEXP(exp - GameConstant.MAX_EXP_LEVEL[info.level - 1]);     
         }
         else if (info.level >= GameConstant.MAX_EXP_LEVEL.Length - 1){
             UI.UpdateExperience(1, "LV Max");
         }
     }
 
+    public void GainOtherEXP(int EXP){
+        info.EXP += EXP;
+        if (info.EXP >= info.MAX_EXP && info.level < GameConstant.MAX_EXP_LEVEL.Length - 1){
+            info.level++;
+            info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level];
+            int exp = info.EXP;
+            info.EXP = 0;
+            info.speed = Mathf.Max(2.5f, info.speed - 0.1f);
+
+            GainOtherEXP(exp - GameConstant.MAX_EXP_LEVEL[info.level - 1]);     
+        }
+    }
+
     [PunRPC]
-    public void ChangeSkin(){
-        if (GameInformation.Instance.PlayerSkin == null) return;
+    public void ChangeSkin(string skName){
         Destroy(Skin.GetChild(0).gameObject);
-        GameObject skin = Instantiate(GameInformation.Instance.PlayerSkin.SkinObject, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), Skin);
-        skin.transform.localPosition = new Vector3(0, 0, 0);
+        foreach (var sk in Skins){
+            if (sk.Name != skName) continue;
+            GameObject skin = Instantiate(sk.SkinObject, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), Skin);
+            skin.transform.localPosition = new Vector3(0, 0, 0);
+            break;
+        }
     }
 
     void NotMine(){
         Destroy(GetComponent<AudioListener>());
+        Name.GetComponent<TextMesh>().text = gameObject.GetPhotonView().Owner.NickName;
     }
 
     void Mine(){
         Destroy(Name);
+        if (GameInformation.Instance.PlayerSkin == null)
+            foreach (var sk in Skins)
+                if (sk.SkinObject.name == Skin.GetChild(0).name){
+                    GameInformation.Instance.PlayerSkin = sk;
+                    break;
+                }
+        view.RPC("ChangeSkin", RpcTarget.All, GameInformation.Instance.PlayerSkin.Name);
     }
 
     public void AfterDie(GameObject killer){
-        UI.ShowPanelRestart();
+        if (IsMine){
+            UI.ShowPanelRestart();
+        }
+        Destroy(gameObject);
     }
 }

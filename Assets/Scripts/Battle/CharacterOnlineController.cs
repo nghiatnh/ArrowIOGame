@@ -28,7 +28,7 @@ public class CharacterOnlineController : MonoBehaviour
     void Start(){
         GameInformation.Instance.characters.Add(GetComponent<CharacterInfo>());
         if (Gates == null) Gates = GameObject.Find("Map").transform.Find("Gate").gameObject;
-        view = GetComponent<PhotonView>();
+        view = gameObject.GetPhotonView();
     }
 
     // Update is called once per frame
@@ -59,19 +59,19 @@ public class CharacterOnlineController : MonoBehaviour
         if (GetComponent<CharacterInfo>().health <= 0) return;
         // When collide a bullet
         if (collider.CompareTag("Bullet")){
-            GameObject attacker = collider.GetComponent<BulletController>().parent;
+            GameObject attacker = collider.GetComponent<BulletOnlineController>().parent;
             if (attacker == gameObject || attacker == null || (attacker.GetComponent<PetController>() != null && attacker.GetComponent<PetController>().parent == transform)) return; 
-            float ATK = collider.GetComponent<BulletController>().ATK;
+            float ATK = collider.GetComponent<BulletOnlineController>().ATK;
             view.RPC("GetDamage", RpcTarget.All, ATK, attacker.GetPhotonView().ViewID);
             hitSource.Play();
-            if (collider.GetComponent<PhotonView>().IsMine){
-                collider.GetComponent<BulletController>().initSpeed = 0f;
+            if (collider.gameObject.GetPhotonView().IsMine){
+                collider.GetComponent<BulletOnlineController>().initSpeed = 0f;
                 PhotonNetwork.Destroy(collider.gameObject);
             }
         }
 
         if (collider.CompareTag("Spike")){
-            GameObject attacker = collider.GetComponent<BulletController>().parent;
+            GameObject attacker = collider.GetComponent<BulletOnlineController>().parent;
             if (attacker == gameObject || attacker == null) return;
             //GetDamage(5, attacker);
             hitSource.Play();
@@ -87,7 +87,7 @@ public class CharacterOnlineController : MonoBehaviour
     // Create a bullet
     public void Attack(GameObject bullet, Vector3 position, Quaternion rotation){
         GameObject obj = PhotonNetwork.Instantiate(bullet.name, position - new Vector3(0,-0.5f,0), rotation);
-        BulletController controller = obj.GetComponent<BulletController>();
+        BulletOnlineController controller = obj.GetComponent<BulletOnlineController>();
         controller.initSpeed = GetComponent<CharacterInfo>().range;
         controller.ATK = GetComponent<CharacterInfo>().ATK;
         controller.isThroughWall = gameObject.GetComponent<CharacterInfo>().status.Contains(STATUS.BULLET_THROUGH_WALL);

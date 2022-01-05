@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  bullet: {fileID: 8654892915708967553, guid: c366ba4ebed7d794dafa0191dff825ed, type: 3}
+  bullet: {fileID: 8654892915708967553, guid: 29c29e44aa31dca46867e9b4c6957a35, type: 3}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64

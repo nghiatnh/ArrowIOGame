@@ -55,10 +55,10 @@ public class PetController : MonoBehaviour
 
     void Attack(){
         GameObject obj = Instantiate(bullet, transform.position - new Vector3(0,-0.5f,0), transform.rotation);
-        BulletController controller = obj.GetComponent<BulletController>();
-        controller.initSpeed = GetComponent<CharacterInfo>().range;
-        controller.ATK = GetComponent<CharacterInfo>().ATK;
-        controller.isThroughWall = parent.GetComponent<CharacterInfo>().status.Contains(STATUS.BULLET_THROUGH_WALL);
-        controller.parent = gameObject;
+        //BulletController controller = obj.GetComponent<BulletController>();
+        // controller.initSpeed = GetComponent<CharacterInfo>().range;
+        // controller.ATK = GetComponent<CharacterInfo>().ATK;
+        // controller.isThroughWall = parent.GetComponent<CharacterInfo>().status.Contains(STATUS.BULLET_THROUGH_WALL);
+        // controller.parent = gameObject;
     }
 }

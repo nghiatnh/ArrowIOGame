@@ -7,6 +7,8 @@ public class OfflineUIController : MonoBehaviour
 {
     public GameObject moveJoystick;
     public GameObject rotateJoystick;
+    
+    [SerializeField] private GameObject btnExit;
     [SerializeField] private GameObject pnRestart;
     [SerializeField] private Transform experienceBar;
     [SerializeField] private Text txtLevel;
@@ -17,6 +19,8 @@ public class OfflineUIController : MonoBehaviour
         rotateJoystick = GameObject.Find("RotateJoystick");
         experienceBar = GameObject.Find("ExperienceBar").transform;
         txtLevel = GameObject.Find("txtLevel").GetComponent<Text>();
+        btnExit = GameObject.Find("btnExit");
+        btnExit.GetComponent<Button>().onClick.AddListener(KillPlayer);
         pnRestart.SetActive(false);
     }
 
@@ -32,5 +36,9 @@ public class OfflineUIController : MonoBehaviour
 
     public void ShowPanelRestart(){
         pnRestart.SetActive(true);
+    }
+
+    public void KillPlayer(){
+        GetComponent<OfflineController>().Player.GetComponent<CharacterOfflineController>().GetDamage(1000, GetComponent<OfflineController>().Player);
     }
 }

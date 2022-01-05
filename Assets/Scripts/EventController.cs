@@ -40,10 +40,6 @@ public class EventController : MonoBehaviour
         SceneManager.LoadScene("StartScene");
     }
 
-    public void KillPlayer(CharacterController info){
-        //info.GetDamage(10000, info.gameObject);
-    }
-
     public void UpdateText(InputField text){
         text.text = GameInformation.Instance.PlayerName;
     }

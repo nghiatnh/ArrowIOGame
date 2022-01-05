@@ -1008,6 +1008,12 @@ MonoBehaviour:
   info: {fileID: 1111393962517891486}
   levelUp: {fileID: 2872189075532324389}
   Name: {fileID: 5627813726432743909}
+  Skins:
+  - {fileID: 11400000, guid: 1e434363fb48a48488c14f3dd1f9d252, type: 2}
+  - {fileID: 11400000, guid: 258c7e78bfbb01d44af04ff1face8c0f, type: 2}
+  - {fileID: 11400000, guid: 298af67d949cbc648833228fa9e0029a, type: 2}
+  - {fileID: 11400000, guid: 4cdd258b347d9c540ade08feb3a7647d, type: 2}
+  - {fileID: 11400000, guid: 8ff900969818ff34480a910f0bcfbb91, type: 2}
 --- !u!1001 &643520184463894821
 PrefabInstance:
   m_ObjectHideFlags: 0

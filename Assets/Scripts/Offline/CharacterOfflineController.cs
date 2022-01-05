@@ -56,9 +56,9 @@ public class CharacterOfflineController : MonoBehaviour
         if (GetComponent<CharacterInfo>().health <= 0) return;
         // When collide a bullet
         if (collider.CompareTag("Bullet")){
-            GameObject attacker = collider.GetComponent<BulletController>().parent;
+            GameObject attacker = collider.GetComponent<BulletOfflineController>().parent;
             if (attacker == gameObject || attacker == null || (attacker.GetComponent<PetController>() != null && attacker.GetComponent<PetController>().parent == transform)) return; 
-            float ATK = collider.GetComponent<BulletController>().ATK;
+            float ATK = collider.GetComponent<BulletOfflineController>().ATK;
             GetDamage(ATK, attacker);
             //GetDamage(ATK, attacker);
             hitSource.Play();
@@ -66,7 +66,7 @@ public class CharacterOfflineController : MonoBehaviour
         }
 
         if (collider.CompareTag("Spike")){
-            GameObject attacker = collider.GetComponent<BulletController>().parent;
+            GameObject attacker = collider.GetComponent<BulletOfflineController>().parent;
             if (attacker == gameObject || attacker == null) return;
             //GetDamage(5, attacker);
             hitSource.Play();
@@ -82,7 +82,7 @@ public class CharacterOfflineController : MonoBehaviour
     // Create a bullet
     public void Attack(GameObject bullet, Vector3 position, Quaternion rotation){
         GameObject obj = Instantiate(bullet, position - new Vector3(0,-0.5f,0), rotation);
-        BulletController controller = obj.GetComponent<BulletController>();
+        BulletOfflineController controller = obj.GetComponent<BulletOfflineController>();
         controller.initSpeed = GetComponent<CharacterInfo>().range;
         controller.ATK = GetComponent<CharacterInfo>().ATK;
         controller.isThroughWall = gameObject.GetComponent<CharacterInfo>().status.Contains(STATUS.BULLET_THROUGH_WALL);
