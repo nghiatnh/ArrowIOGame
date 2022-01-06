@@ -26,6 +26,7 @@ public class CharacterOfflineController : MonoBehaviour
     void Start(){
         GameInformation.Instance.characters.Add(GetComponent<CharacterInfo>());
         if (Gates == null) Gates = GameObject.Find("Map").transform.Find("Gate").gameObject;
+        GetComponent<CharacterInfo>().onCreatePet = new CharacterInfo.OnCreatePet(CreatePet);
     }
 
     // Update is called once per frame

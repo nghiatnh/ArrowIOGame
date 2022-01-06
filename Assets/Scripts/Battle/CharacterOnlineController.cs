@@ -29,14 +29,14 @@ public class CharacterOnlineController : MonoBehaviour
         GameInformation.Instance.characters.Add(GetComponent<CharacterInfo>());
         if (Gates == null) Gates = GameObject.Find("Map").transform.Find("Gate").gameObject;
         view = gameObject.GetPhotonView();
+        GetComponent<CharacterInfo>().onCreatePet = new CharacterInfo.OnCreatePet(CreatePet);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!view.IsMine || GetComponent<CharacterInfo>().health <= 0) {
-            return;
-        }
+        if (!view.IsMine || GetComponent<CharacterInfo>().health <= 0) return;
+
         // Check on gate
         bool isCollide = Physics.Raycast(transform.position, Vector3.down, 1f, gateLayerMask);
         if (isCollide && !IsOnGate){
@@ -57,11 +57,14 @@ public class CharacterOnlineController : MonoBehaviour
 
     void OnTriggerEnter(Collider collider){
         if (GetComponent<CharacterInfo>().health <= 0) return;
+
         // When collide a bullet
         if (collider.CompareTag("Bullet")){
             GameObject attacker = collider.GetComponent<BulletOnlineController>().parent;
-            if (attacker == gameObject || attacker == null || (attacker.GetComponent<PetController>() != null && attacker.GetComponent<PetController>().parent == transform)) return; 
+            if (attacker == gameObject || attacker == null || (attacker.GetComponent<PetOnlineController>() != null && attacker.GetComponent<PetOnlineController>().parent.gameObject.GetPhotonView().ViewID == view.ViewID)) return; 
             float ATK = collider.GetComponent<BulletOnlineController>().ATK;
+            if (attacker.GetComponent<CharacterInfo>().status.Contains(STATUS.CRIT))
+                ATK = CritDamge(ATK, attacker.GetComponent<CharacterInfo>().status.FindAll(x => x == STATUS.CRIT).Count);
             view.RPC("GetDamage", RpcTarget.All, ATK, attacker.GetPhotonView().ViewID);
             hitSource.Play();
             if (collider.gameObject.GetPhotonView().IsMine){
@@ -97,8 +100,8 @@ public class CharacterOnlineController : MonoBehaviour
 
     public void CreateSpike(){
         if (Time.realtimeSinceStartup - lastTimeSpike >= 0.3f) {
-            GameObject obj = Instantiate(spike, new Vector3(transform.position.x, 0, transform.position.z), new Quaternion(0, 0, 0, 1));
-            obj.GetComponent<SpikeController>().parent = gameObject;
+            GameObject obj = PhotonNetwork.Instantiate(spike.name, new Vector3(transform.position.x, 0, transform.position.z), new Quaternion(0, 0, 0, 1));
+            obj.GetComponent<SpikeOnlineController>().SetParent(view.ViewID);
             lastTimeSpike = Time.realtimeSinceStartup;
         }
     }
@@ -106,14 +109,6 @@ public class CharacterOnlineController : MonoBehaviour
     [PunRPC]
     public void GetDamage(float ATK, int attackerID){
         GameObject attacker = PhotonNetwork.GetPhotonView(attackerID).gameObject;
-        // If CRIT
-        if (attacker.GetComponent<CharacterInfo>().status.Contains(STATUS.CRIT)){
-            int r = Random.Range(0, 100);
-            if (r < GameConstant.CritAverage(attacker.GetComponent<CharacterInfo>().status.FindAll(x => x == STATUS.CRIT).Count)) {
-                ATK *= 2;
-                crit.GetComponent<Animator>().SetTrigger("Crit");
-            }
-        }
 
         // Descrease Health
         GetComponent<CharacterInfo>().health = Mathf.Max(0, GetComponent<CharacterInfo>().health - ATK * GameConstant.INIT_ATK / (GameConstant.INIT_ATK + GetComponent<CharacterInfo>().DEF));
@@ -123,7 +118,7 @@ public class CharacterOnlineController : MonoBehaviour
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<CapsuleCollider>().isTrigger = true;
             transform.Find("Health").gameObject.SetActive(false);
-            if (attacker.CompareTag("Pet")) {attacker = attacker.GetComponent<PetController>().parent.gameObject;}
+            if (attacker.CompareTag("Pet")) {attacker = attacker.GetComponent<PetOnlineController>().parent.gameObject;}
             // Attacker gain power
             attacker.GetComponent<CharacterInfo>().powerPoint = System.Math.Max(attacker.GetComponent<CharacterInfo>().powerPoint, GetComponent<CharacterInfo>().powerPoint) + Random.Range(10, 20) * GetComponent<CharacterInfo>().level;
             // If kill gain health
@@ -141,9 +136,9 @@ public class CharacterOnlineController : MonoBehaviour
     }
 
     public void CreatePet(){
-        GameObject obj = Instantiate(pet, transform.position - new Vector3(-1, 0, 0), transform.rotation);
-        obj.GetComponent<PetController>().parent = transform;
-        obj.GetComponent<CharacterInfo>().ATK = GetComponent<CharacterInfo>().ATK / 9;
+        if (!view.IsMine) return;
+        GameObject obj = PhotonNetwork.Instantiate(pet.name, transform.position - new Vector3(-1, 0, 0), transform.rotation);
+        obj.GetComponent<PetOnlineController>().SetParent(view.ViewID);
     }
 
     public bool OnGate(){
@@ -158,5 +153,14 @@ public class CharacterOnlineController : MonoBehaviour
     private void ThroughWall(Vector3 moveDir){
         if (Physics.Raycast(gameObject.transform.position, moveDir, 0.55f, wallLayerMask) && !Physics.Raycast(transform.position + moveDir * 2f, moveDir, 1f, wallLayerMask))
             transform.position += moveDir * 2f;
+    }
+
+    private float CritDamge(float ATK, int countCrit){
+        int r = Random.Range(0, 100);
+        if (r < GameConstant.CritAverage(countCrit)){
+            ATK *= 2;
+            crit.GetComponent<Animator>().SetTrigger("Crit");
+        }
+        return ATK;        
     }
 }

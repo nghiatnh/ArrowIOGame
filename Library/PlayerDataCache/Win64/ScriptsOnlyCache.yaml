@@ -20,12 +20,14 @@ ScriptsOnlyBuild:
     - OnlineController
     - OnlineUIController
     - PetController
+    - PetOnlineController
     - PlayerOfflineController
     - PlayerOnlineController
     - SkilInfo
     - SkinController
     - SkinInfo
     - SpikeController
+    - SpikeOnlineController
     - StartSceneController
     - UIController
     PhotonUnityNetworking.Demos.dll:
@@ -224,6 +226,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5386}
     - Class: 114
       Script: {instanceID: 5430}
+    - Class: 114
+      Script: {instanceID: 58840}
+    - Class: 114
+      Script: {instanceID: 86166}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -505,6 +511,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5336}
     - Class: 114
       Script: {instanceID: 5412}
+    - Class: 114
+      Script: {instanceID: 58840}
+    - Class: 114
+      Script: {instanceID: 86166}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1092,7 +1102,7 @@ ScriptsOnlyBuild:
     className: OnEscapeQuit
   - hash:
       serializedVersion: 2
-      Hash: fe3e38bc9040d80aa3a6040f5f9f4192
+      Hash: dbbdd8e7b847226a63f0bacc8521cb1c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterInfo
@@ -2176,6 +2186,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyController
+  - hash:
+      serializedVersion: 2
+      Hash: f8c97d8b72cf214936b91daaeeb92930
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PetOnlineController
+  - hash:
+      serializedVersion: 2
+      Hash: 152e183bfbed26a16fe16da9035134a4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpikeOnlineController
   platform: 19
   scenePathNames:
   - Assets/Scenes/StartScene.unity

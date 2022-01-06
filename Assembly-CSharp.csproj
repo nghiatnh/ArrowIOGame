@@ -61,6 +61,7 @@
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
      <Compile Include="Assets\Scripts\Offline\PlayerOfflineController.cs" />
      <Compile Include="Assets\Scripts\Battle\BulletOnlineController.cs" />
+     <Compile Include="Assets\Scripts\Offline\BulletOfflineController.cs" />
      <Compile Include="Assets\Scripts\SpikeController.cs" />
      <Compile Include="Assets\Scripts\Offline\CharacterOfflineController.cs" />
      <Compile Include="Assets\Scripts\ChangeSkinScene\SkinInfo.cs" />
@@ -69,6 +70,7 @@
      <Compile Include="Assets\Scripts\Offline\OfflineUIController.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
      <Compile Include="Assets\Scripts\Joysticks\Joysticks\FloatingJoystick.cs" />
+     <Compile Include="Assets\Scripts\Battle\ItemOnlineController.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
      <Compile Include="Assets\Scripts\Offline\OfflineController.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
@@ -83,8 +85,8 @@
      <Compile Include="Assets\Scripts\SkillController.cs" />
      <Compile Include="Assets\Scripts\Battle\PlayerOnlineController.cs" />
      <Compile Include="Assets\Scripts\Offline\EnemyController.cs" />
-     <Compile Include="Assets\Scripts\Offline\BulletOfflineController.cs" />
-     <Compile Include="Assets\Scripts\Battle\ItemOnlineController.cs" />
+     <Compile Include="Assets\Scripts\Battle\PetOnlineController.cs" />
+     <Compile Include="Assets\Scripts\Battle\SpikeOnlineController.cs" />
      <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
      <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
      <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
@@ -718,33 +720,21 @@
       <Project>{1d22dcac-88fe-b160-df62-19f138e55663}</Project>
       <Name>PhotonUnityNetworking</Name>
     </ProjectReference>
-    <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
-      <Project>{92c3952b-29b8-d2c3-7f1f-343dc918fc0e}</Project>
-      <Name>PunDemos.DemoSlotcarEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
-      <Project>{1e1a26d7-abd7-2ef5-006f-f6e8c11fcb58}</Project>
-      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
-      <Project>{a1fe0bc5-e918-4729-7cf0-ea2707cae0b7}</Project>
-      <Name>PhotonUnityNetworking.Utilities</Name>
+    <ProjectReference Include="PhotonChat.csproj">
+      <Project>{8463f7eb-ac97-576e-5450-5a93003c4c9c}</Project>
+      <Name>PhotonChat</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
       <Project>{ebae7362-a450-68a6-ffc3-da843a21b80d}</Project>
       <Name>PhotonUnityNetworking.Demos</Name>
     </ProjectReference>
-    <ProjectReference Include="PhotonChat.csproj">
-      <Project>{8463f7eb-ac97-576e-5450-5a93003c4c9c}</Project>
-      <Name>PhotonChat</Name>
+    <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
+      <Project>{edd0cd72-2d93-0aaf-39b9-b86a2236ef66}</Project>
+      <Name>PhotonUnityNetworking.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
       <Project>{e2a1c0ed-bfe2-61fb-9032-769401fd79fc}</Project>
       <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
-      <Project>{edd0cd72-2d93-0aaf-39b9-b86a2236ef66}</Project>
-      <Name>PhotonUnityNetworking.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="PunDemos.DemoHubEditor.csproj">
       <Project>{99cc1fb1-0dcb-7a58-7ae4-2074dcbe3bfe}</Project>
@@ -753,6 +743,18 @@
     <ProjectReference Include="PhotonRealtime.csproj">
       <Project>{42572d7b-d5f6-ef11-7264-ad07384f1ee5}</Project>
       <Name>PhotonRealtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
+      <Project>{92c3952b-29b8-d2c3-7f1f-343dc918fc0e}</Project>
+      <Name>PunDemos.DemoSlotcarEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
+      <Project>{a1fe0bc5-e918-4729-7cf0-ea2707cae0b7}</Project>
+      <Name>PhotonUnityNetworking.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
+      <Project>{1e1a26d7-abd7-2ef5-006f-f6e8c11fcb58}</Project>
+      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

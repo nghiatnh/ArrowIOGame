@@ -58,7 +58,7 @@ public class SkillController
         }
     }
 
-    public static void ChooseSkill(SKILLS skill, Transform player){
+    public static void ChooseSkill(SKILLS skill, Transform player, bool isCallback = true){
         CharacterInfo info = player.GetComponent<CharacterInfo>();
         switch (skill){
             case SKILLS.ALL_STATUS_UP: //Done
@@ -120,9 +120,11 @@ public class SkillController
                 info.status.Add(STATUS.THROUGH_WALL);
                 break;
             case SKILLS.PET_NINJA: //Done
-                player.GetComponent<CharacterOfflineController>().CreatePet();
+                player.GetComponent<CharacterInfo>().CreatePet();
                 break;
         }
+        if (isCallback)
+            info.ChangeInfo(skill);
     }
     #endregion
 }

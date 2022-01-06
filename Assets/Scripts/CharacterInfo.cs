@@ -15,9 +15,22 @@ public class CharacterInfo: MonoBehaviour
     public float range = 15f; // init Speed
     public long powerPoint = 0;
     public List<STATUS> status = new List<STATUS>();
-    public GameObject weapon;
+    public delegate void OnUpdateInfo(SKILLS skill);
+    public OnUpdateInfo onUpdateInfo;
+    public delegate void OnCreatePet();
+    public OnCreatePet onCreatePet;
 
     public void GainHealth(float _health){
         health = Mathf.Min(maxHealth, health + _health);
+    }
+
+    public void ChangeInfo(SKILLS skill){
+        if (onUpdateInfo != null)
+            onUpdateInfo.Invoke(skill);
+    }
+
+    public void CreatePet(){
+        if (onCreatePet != null)
+            onCreatePet.Invoke();
     }
 }

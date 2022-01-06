@@ -35,6 +35,7 @@ public class PlayerOnlineController : MonoBehaviour
         info = GetComponent<CharacterInfo>();
         info.MAX_EXP = GameConstant.MAX_EXP_LEVEL[info.level];
         info.characterName = GameInformation.Instance.PlayerName;
+        info.onUpdateInfo = new CharacterInfo.OnUpdateInfo(UpdateInfo);
         GetComponent<CharacterOnlineController>().afterDie = new CharacterOnlineController.AfterDie(AfterDie);
         if (Skin == null)
             Skin = transform.Find("Skin");
@@ -66,7 +67,7 @@ public class PlayerOnlineController : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(new Vector3(rotateJoystick.Direction.x, 0, rotateJoystick.Direction.y));
         }        
         if ((moveDir.x != 0 || moveDir.z != 0) && GetComponent<CharacterInfo>().status.Contains(STATUS.MAKE_SPIKE)){
-            GetComponent<CharacterOfflineController>().CreateSpike();
+            GetComponent<CharacterOnlineController>().CreateSpike();
         }
         cam.transform.position = new Vector3(transform.position.x, transform.position.y + 25, transform.position.z - 9);
 
@@ -172,12 +173,23 @@ public class PlayerOnlineController : MonoBehaviour
                     break;
                 }
         view.RPC("ChangeSkin", RpcTarget.All, GameInformation.Instance.PlayerSkin.Name);
+        GameObject.Find("UI").GetComponent<UIController>().player = transform;
     }
 
     public void AfterDie(GameObject killer){
         if (IsMine){
             UI.ShowPanelRestart();
+            PhotonNetwork.Destroy(gameObject);
         }
-        Destroy(gameObject);
+    }
+
+    private void UpdateInfo(SKILLS skill){
+        if (IsMine)
+            view.RPC("RPCUpdateInfo", RpcTarget.Others, skill);
+    }
+
+    [PunRPC]
+    private void RPCUpdateInfo(SKILLS skill){
+        SkillController.ChooseSkill(skill, transform, false);
     }
 }

@@ -457,7 +457,6 @@ MonoBehaviour:
   range: 15
   powerPoint: 0
   status: 
-  weapon: {fileID: 0}
 --- !u!65 &5916057641993188342
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -965,9 +964,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSource: {fileID: 9050921252194898853}
   hitSource: {fileID: 7996541423645446865}
-  spike: {fileID: 0}
+  spike: {fileID: 8902782546639747163, guid: d3c8dd3f5bbd98a46b60786dd2f3075c, type: 3}
   crit: {fileID: 8130395290230293934}
-  pet: {fileID: 0}
+  pet: {fileID: 8654892915708967553, guid: da3e09a5a714ce54798fcb396e577b35, type: 3}
   Gates: {fileID: 0}
   gateLayerMask:
     serializedVersion: 2
